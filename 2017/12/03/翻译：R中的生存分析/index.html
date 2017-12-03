@@ -6,18 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://donk3yzz.com">
-  <title>Archives: 2017/11 | 乐观的blog</title>
+  <title>翻译：R-Views Survival analysis with R | 乐观的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="start from zero">
-<meta property="og:type" content="website">
-<meta property="og:title" content="乐观的blog">
-<meta property="og:url" content="https://donk3yzz.com/archives/2017/11/index.html">
+  <meta name="description" content="原文来自R Views-Survival analysis with R，侵..侵删？ 　　Survival analysis的起源可以追溯到1662年，一位名为John Graunt的伦敦商人基于手中的死亡记录数据发布了一系列的推断，这使得生存分析成为统计学最古老的分枝之一。在十八世纪以前，基本生命表方法，包括处理删">
+<meta name="keywords" content="Survival Analysis,R Views">
+<meta property="og:type" content="article">
+<meta property="og:title" content="翻译：R-Views Survival analysis with R">
+<meta property="og:url" content="https://donk3yzz.com/2017/12/03/翻译：R中的生存分析/index.html">
 <meta property="og:site_name" content="乐观的blog">
-<meta property="og:description" content="start from zero">
+<meta property="og:description" content="原文来自R Views-Survival analysis with R，侵..侵删？ 　　Survival analysis的起源可以追溯到1662年，一位名为John Graunt的伦敦商人基于手中的死亡记录数据发布了一系列的推断，这使得生存分析成为统计学最古老的分枝之一。在十八世纪以前，基本生命表方法，包括处理删失数据的技巧被人们发现；十八世纪早期，那些大师们的工作（de Moivre对">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-3-1.png">
+<meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-4-1.png">
+<meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-5-1.png">
+<meta property="og:image" content="https://donk3yzz.com/2017/12/03/翻译：R中的生存分析/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-6-1.png">
+<meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-7-1.png">
+<meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-9-1.png">
+<meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-12-1.png">
+<meta property="og:updated_time" content="2017-12-03T15:25:40.166Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="乐观的blog">
-<meta name="twitter:description" content="start from zero">
+<meta name="twitter:title" content="翻译：R-Views Survival analysis with R">
+<meta name="twitter:description" content="原文来自R Views-Survival analysis with R，侵..侵删？ 　　Survival analysis的起源可以追溯到1662年，一位名为John Graunt的伦敦商人基于手中的死亡记录数据发布了一系列的推断，这使得生存分析成为统计学最古老的分枝之一。在十八世纪以前，基本生命表方法，包括处理删失数据的技巧被人们发现；十八世纪早期，那些大师们的工作（de Moivre对">
+<meta name="twitter:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-3-1.png">
   
     <link rel="alternative" href="/atom.xml" title="乐观的blog" type="application/atom+xml">
   
@@ -143,64 +153,311 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-翻译：R中的生存分析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/24/first-success-plz/" class="archive-article-date">
-  	<time datetime="2017-11-24T03:17:34.950Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/24/first-success-plz/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      翻译：R-Views Survival analysis with R
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/12/03/翻译：R中的生存分析/" class="archive-article-date">
+  	<time datetime="2017-12-03T13:51:32.622Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　原文来自<a href="https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/" target="_blank" rel="noopener">R Views-Survival analysis with R</a>，侵..侵删？</p>
+<p>　　Survival analysis的起源可以追溯到1662年，一位名为John Graunt的伦敦商人基于手中的死亡记录数据发布了一系列的推断，这使得生存分析成为统计学最古老的分枝之一。在十八世纪以前，基本生命表方法，包括处理删失数据的技巧被人们发现；十八世纪早期，那些大师们的工作（de Moivre对于养老金的研究、Daniel Bernoulli对于接种天花风险的研究）奠定了生存分析现代方法的基础。如今，生存分析模型在工程、保险、市场营销、医药以及许多应用领域发挥着重要作用，所以，R中拥有丰富的生存分析函数也就不足为奇了。 <a href="https://cran.r-project.org/web/views/Survival.html" target="_blank" rel="noopener">CRAN’s Survival Analysis Task View</a>包含了几乎所有R中生存分析相关的函数和包，实在是无比的强大(indeed formidable)，我们都应该对于此Task View的维护者，Arthur Allignol和Aurielien Latouche充满感激之情。</p>
+<p>（注：一股浓浓的的四级翻译味…）</p>
+<p>　　但是如果当我们打开这个网页，就会发现里面的内容实在是太过于丰富，这座“大厦”让我们了解到R的开发人员为生存分析的理论和实践做出了多么大的贡献。尽管Task View的页面组织的很好，但是一个生存分析学者如果想要在里面找到他自己需要的方法可能也需要花上一些时间，更不用说R或者生存分析的新用户了。所以，我将提供一个比较狭窄的路径去供新人了解此Task View，依赖于<code>survival</code>,<code>ggplot</code>,<code>ggfortify</code>,<code>ranger</code>四个包。</p>
+<p>　　<code>survival</code>包是R语言“生存分析大厦”的基石，不仅是因为<code>survival</code>包本身富有特点，更是因为其中的<code>Surv()</code>函数，建立了包含删失信息和失败时间的生存分析对象(Survival analysis object)，成为了生存分析的基本数据结构。此包由Terry Therneau博士于1986年开始编写，它的初次发布是在1989年末，应用于CMU主持的Statlib service项目中。随后这个包被编入<a href="http://www.mayo.edu/research/documents/tr53pdf/doc-10027379" target="_blank" rel="noopener">Splus</a>中，后来被编入了R。</p>
+<p>　　<code>ggfortify</code>使得我们能够通过<code>ggplot::autoplot()</code>能够绘制漂亮的、单线生存图形。</p>
+<p>　　在我使用的生存分析包中，<code>ranger</code>大概是一个惊喜，<code>ranger()</code>是众所周知的，在随机森林算法中集合分类与回归树的快速实现的函数，而<a href="https://arxiv.org/pdf/1508.04409.pdf" target="_blank" rel="noopener">Benchmarks指出</a>，<code>ranger()</code>适合于构建大量、高维数据集下的time-to-event model，对于网络营销应用具有重要意义。因为<code>ranger()</code>本身使用的就是<code>Surv()</code>的标准生存数据对象，所以在这个机器学习大热的时代中，<code>ranger()</code>同样成为一个了解生存分析的理想工具。</p>
+<h2 id="载入数据"><a href="#载入数据" class="headerlink" title="载入数据"></a>载入数据</h2><p>　　第一个代码块是载入需要的包和数据集，<code>veteran</code>是一个基于两种肺癌治疗方法的随机对比临床实验的数据集，来源于<code>survival</code>包。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(survival)</span><br><span class="line"><span class="keyword">library</span>(ranger)</span><br><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(dplyr)</span><br><span class="line"><span class="keyword">library</span>(ggfortify)</span><br><span class="line"></span><br><span class="line">data(veteran)</span><br><span class="line">head(veteran)</span><br></pre></td></tr></table></figure>
+<pre><code>##   trt celltype time status karno diagtime age prior
+## 1   1 squamous   72      1    60        7  69     0
+## 2   1 squamous  411      1    70        5  64    10
+## 3   1 squamous  228      1    60        3  38     0
+## 4   1 squamous  126      1    60        9  63    10
+## 5   1 squamous  118      1    70       11  65    10
+## 6   1 squamous   10      1    20        5  49     0
+</code></pre><p>　　<code>veteran</code>中的变量: - veteran 老兵 - trt: 1=standard 2=test - celltype: 1=squamous（鳞状的）, 2=small cell, 3=adeno（腺病毒）, 4=large - time: survival time in days - status: censoring status - karno: 卡氏方法评分 (100=good) - diagtime: months from diagnosis to randomization - age: in years - prior: 先前是否接受过治疗 0=no, 10=yes 注：<a href="http://www.hospicepatients.org/karnofsky.html" target="_blank" rel="noopener">karnofsky</a></p>
+<h2 id="Kaplan-Meier估计"><a href="#Kaplan-Meier估计" class="headerlink" title="Kaplan Meier估计"></a>Kaplan Meier估计</h2><p>　　首先是用<code>Surv()</code>函数建立标准的生存对象，<code>time</code>记录了生存时间；<code>status</code>表示患者死亡(status=1)或者生存时间删失(status=0)；下面<code>km</code>时间中的”+”表示时间是删失的。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Kaplan Meier Survival Curve</span></span><br><span class="line">km &lt;- with(veteran, Surv(time, status))</span><br><span class="line">head(km,<span class="number">80</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>##  [1]  72  411  228  126  118   10   82  110  314  100+  42    8  144   25+
+## [15]  11   30  384    4   54   13  123+  97+ 153   59  117   16  151   22 
+## [29]  56   21   18  139   20   31   52  287   18   51  122   27   54    7 
+## [43]  63  392   10    8   92   35  117  132   12  162    3   95  177  162 
+## [57] 216  553  278   12  260  200  156  182+ 143  105  103  250  100  999 
+## [71] 112   87+ 231+ 242  991  111    1  587  389   33
+</code></pre><p>　　开始我们的分析，我们用formula<code>Surv(time,status)~1</code>和<code>survfit()</code>函数进行Kaplan-Meier估计的生存概率函数，<code>times</code>函数用于控制<code>summary()</code>函数的展示的时间。这里我们选择第1,30,60,90和之后每90天的生存概率估计。这是一个非常简单的模型，我们只需要三行代码进行拟合、摘要和绘图。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">km_fit &lt;- survfit(Surv(time, status) ~ <span class="number">1</span>, data=veteran)</span><br><span class="line">summary(km_fit, times = c(<span class="number">1</span>,<span class="number">30</span>,<span class="number">60</span>,<span class="number">90</span>*(<span class="number">1</span>:<span class="number">10</span>)))</span><br></pre></td></tr></table></figure>
+<pre><code>## Call: survfit(formula = Surv(time, status) ~ 1, data = veteran)
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1    137       2    0.985  0.0102      0.96552       1.0000
+##    30     97      39    0.700  0.0392      0.62774       0.7816
+##    60     73      22    0.538  0.0427      0.46070       0.6288
+##    90     62      10    0.464  0.0428      0.38731       0.5560
+##   180     27      30    0.222  0.0369      0.16066       0.3079
+##   270     16       9    0.144  0.0319      0.09338       0.2223
+##   360     10       6    0.090  0.0265      0.05061       0.1602
+##   450      5       5    0.045  0.0194      0.01931       0.1049
+##   540      4       1    0.036  0.0175      0.01389       0.0934
+##   630      2       2    0.018  0.0126      0.00459       0.0707
+##   720      2       0    0.018  0.0126      0.00459       0.0707
+##   810      2       0    0.018  0.0126      0.00459       0.0707
+##   900      2       0    0.018  0.0126      0.00459       0.0707
+</code></pre><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#plot(km_fit, xlab="Days", main = 'Kaplan Meyer Plot') #基础图形同样可以使用</span></span><br><span class="line">autoplot(km_fit)</span><br></pre></td></tr></table></figure>
+<p><img src="/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-3-1.png" alt=""></p>
+<p>　　然后我们绘制按照治疗分组的生存曲线</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">km_trt_fit &lt;- survfit(Surv(time, status) ~ trt, data=veteran)</span><br><span class="line"><span class="comment">#plot(km_trt_fit)</span></span><br><span class="line">autoplot(km_trt_fit)</span><br></pre></td></tr></table></figure>
+<p><img src="/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-4-1.png" alt=""></p>
+<p>　　为了绘制一张探索性图，我们需要做一些数据整理去判断不同年龄的生存情况。我们创建一个新的数据框包含新的分类变量<code>AG</code>，其中<code>GT60</code>代表老兵年龄大于60岁，<code>LT60</code>代表小于60；然后我顺手把<code>trt</code>和<code>prior</code>变量重新定义为了因子变量，当然<code>survfit()</code>和<code>npsurv()</code>不需要这样的重新定义也可以正常工作。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#注：mutate()函数可以在数据框中添加新变量或改变变量定义，来源于dplyr包</span></span><br><span class="line">vet &lt;- mutate(veteran, AG = ifelse((age &lt; <span class="number">60</span>), <span class="string">"LT60"</span>, <span class="string">"OV60"</span>),</span><br><span class="line">              AG = factor(AG),</span><br><span class="line">              trt = factor(trt,labels=c(<span class="string">"standard"</span>,<span class="string">"test"</span>)),</span><br><span class="line">              prior = factor(prior,labels=c(<span class="string">"N0"</span>,<span class="string">"Yes"</span>)))</span><br><span class="line"></span><br><span class="line">km_AG_fit &lt;- survfit(Surv(time, status) ~ AG, data=vet)</span><br><span class="line">autoplot(km_AG_fit)</span><br></pre></td></tr></table></figure>
+<p><img src="/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-5-1.png" alt=""><br>　　虽然两条曲线在50天以前具有一定的重合性，不过在一年以后，年轻的患者还是具有更高的生存概率。</p>
+<h2 id="cox比例风险模型"><a href="#cox比例风险模型" class="headerlink" title="cox比例风险模型"></a>cox比例风险模型</h2><p>　　接下来我将使用所有的协变量拟合一个cox比例风险模型</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Fit Cox Model</span></span><br><span class="line">cox &lt;- coxph(Surv(time, status) ~ trt + celltype + karno</span><br><span class="line">             + diagtime + age + prior, data = vet)</span><br><span class="line">summary(cox)</span><br></pre></td></tr></table></figure>
+<pre><code>## Call:
+## coxph(formula = Surv(time, status) ~ trt + celltype + karno + 
+##     diagtime + age + prior, data = vet)
+## 
+##   n= 137, number of events= 128 
+## 
+##                         coef  exp(coef)   se(coef)      z Pr(&gt;|z|)    
+## trttest            2.946e-01  1.343e+00  2.075e-01  1.419  0.15577    
+## celltypesmallcell  8.616e-01  2.367e+00  2.753e-01  3.130  0.00175 ** 
+## celltypeadeno      1.196e+00  3.307e+00  3.009e-01  3.975 7.05e-05 ***
+## celltypelarge      4.013e-01  1.494e+00  2.827e-01  1.420  0.15574    
+## karno             -3.282e-02  9.677e-01  5.508e-03 -5.958 2.55e-09 ***
+## diagtime           8.132e-05  1.000e+00  9.136e-03  0.009  0.99290    
+## age               -8.706e-03  9.913e-01  9.300e-03 -0.936  0.34920    
+## priorYes           7.159e-02  1.074e+00  2.323e-01  0.308  0.75794    
+## ---
+## Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &apos;.&apos; 0.1 &apos; &apos; 1
+## 
+##                   exp(coef) exp(-coef) lower .95 upper .95
+## trttest              1.3426     0.7448    0.8939    2.0166
+## celltypesmallcell    2.3669     0.4225    1.3799    4.0597
+## celltypeadeno        3.3071     0.3024    1.8336    5.9647
+## celltypelarge        1.4938     0.6695    0.8583    2.5996
+## karno                0.9677     1.0334    0.9573    0.9782
+## diagtime             1.0001     0.9999    0.9823    1.0182
+## age                  0.9913     1.0087    0.9734    1.0096
+## priorYes             1.0742     0.9309    0.6813    1.6937
+## 
+## Concordance= 0.736  (se = 0.03 )
+## Rsquare= 0.364   (max possible= 0.999 )
+## Likelihood ratio test= 62.1  on 8 df,   p=1.799e-10
+## Wald test            = 62.37  on 8 df,   p=1.596e-10
+## Score (logrank) test = 66.74  on 8 df,   p=2.186e-11
+</code></pre><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cox_fit &lt;- survfit(cox)</span><br><span class="line"><span class="comment">#plot(cox_fit, main = "cph model", xlab="Days")</span></span><br><span class="line">autoplot(cox_fit)</span><br></pre></td></tr></table></figure>
+<p><img src="img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-6-1.png" alt=""><br>　　注意，这个模型把small cell type,adeno cell type和karno标记为显著的，然而在解释模型的过程中，有一些地方是值得注意的。如果cox比例风险模型被认为是“稳健的”，一些谨慎的分析者就会会检查模型下的假定。比如，cox比例风险模型假定所有协变量是不随时间变化的。但是在<code>survival</code>包的<a href="https://cran.r-project.org/web/packages/survival/vignettes/timedep.pdf" target="_blank" rel="noopener">一个梗概</a>中，Therneau, Crowson和Atkinson证明了Karnofsky score(karno)是依赖于时间的，所以这个假定在上面的模型中是被违背的。然后作者在这个梗概中，介绍了一种处理依赖于时间的协变量的方法。</p>
+<p>　　那些习惯于计算ROC曲线（注：机器学习中对模型的一种评价标准）来评估模型表现的数据科学家们，应该对于一致性统计量（Concordence statistic）很有兴趣。在<code>survival</code>包里<code>survConcordance()</code>函数的文档中，将一致性定义为（翻译可能有问题建议读原文..）： 任意的两个观测量之间达到一致(agreement)的概率，而这里的一致(agreement)是指这两个观测量中拥有较短生存时间的那一个同样拥有更高的风险评分(risk score)，风险评分常来源于Cox模型或其他回归。 </p>
+<blockquote>
+<p>the probability of agreement for any two randomly chosen observations, where in this case agreement means that the observation with the shorter survival time of the two also has the larger risk score. The predictor (or risk score) will often be the result of a Cox model or other regression</p>
+</blockquote>
+<p>　　他还强调，对于连续型协变量来说，一致性统计量等价于Kendall’s tau统计量（注：<a href="https://en.wikipedia.org/wiki/Kendall_tau_distance" target="_blank" rel="noopener">Kendall tau distance</a>），对于logistic回归，一致性统计量等价于ROC曲线下面的面积。 </p>
+<blockquote>
+<p>For continuous covariates concordance is equivalent to Kendall’s tau, and for logistic regression is is equivalent to the area under the ROC curve.</p>
+</blockquote>
+<p>　　为了证明这一观点，我将使用<code>survival</code>包和<code>ggplot2</code>,<code>ggfortify</code>,<code>ranger</code>，对<code>veteran</code>数据集中的删失数据拟合Aalen’s additive regression model（注：关于<a href="http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf" target="_blank" rel="noopener">Aalen’s additive regression model</a>）,文档中声明：Aalen model假设累积风险模型<em>H</em>(<em>t</em>)=<em>a</em>(<em>t</em>)+<em>XB</em>(<em>T</em>),其中<em>a</em>(<em>t</em>)是依赖于时间的截距项，<em>X</em>是该对象协变量的向量（可能依赖于时间），<em>B</em>(<em>t</em>)是一个依赖于时间系数的矩阵。</p>
+<p>　　下面的图形将展示协变量的效应是如何随着时间而变化的，请注意<code>karno</code>斜率(slope)中的陡坡(steep slope)和突变(abrupt change)。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aa_fit &lt;-aareg(Surv(time, status) ~ trt + celltype +</span><br><span class="line">                 karno + diagtime + age + prior , </span><br><span class="line">                 data = vet)</span><br><span class="line">autoplot(aa_fit)</span><br></pre></td></tr></table></figure>
+<p><img src="/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-7-1.png" alt=""> </p>
+<h2 id="随机生存森林模型"><a href="#随机生存森林模型" class="headerlink" title="随机生存森林模型"></a>随机生存森林模型</h2><p>　　最后一个例子，我们将展示一个“数据科学式”的方法来构建时间-事件模型，我将使用<code>ranger()</code>函数来拟合随机森林集成模型，不过要注意，对于生存数据构建树型模型并没有什么新发现。Terry Therneau和 Brian Ripley一起同样写了<a href="https://cran.r-project.org/web/packages/rpart/index.html" target="_blank" rel="noopener"><code>rpart</code></a>包，可以在<a href="https://cran.r-project.org/web/packages/rpart/vignettes/longintro.pdf" target="_blank" rel="noopener">rpart简介</a>的section8.4中找到生存分析案例。</p>
+<p>　　<code>ranger()</code>为数据集中的每一个观测都建立了模型，下面的代码块建立的模型同上面的cox模型使用了同样的协变量并随机绘制了二十条曲线和一条代表所有患者平均水平的曲线，下面将使用R的基础绘图。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ranger model</span></span><br><span class="line">r_fit &lt;- ranger(Surv(time, status) ~ trt + celltype + </span><br><span class="line">                     karno + diagtime + age + prior,</span><br><span class="line">                     data = vet,</span><br><span class="line">                     mtry = <span class="number">4</span>,</span><br><span class="line">                     importance = <span class="string">"permutation"</span>,</span><br><span class="line">                     splitrule = <span class="string">"extratrees"</span>,</span><br><span class="line">                     verbose = <span class="literal">TRUE</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Average the survival models</span></span><br><span class="line">death_times &lt;- r_fit$unique.death.times </span><br><span class="line">surv_prob &lt;- data.frame(r_fit$survival)</span><br><span class="line">avg_prob &lt;- sapply(surv_prob,mean)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot the survival models for each patient</span></span><br><span class="line">plot(r_fit$unique.death.times,r_fit$survival[<span class="number">1</span>,], </span><br><span class="line">     type = <span class="string">"l"</span>, </span><br><span class="line">     ylim = c(<span class="number">0</span>,<span class="number">1</span>),</span><br><span class="line">     col = <span class="string">"red"</span>,</span><br><span class="line">     xlab = <span class="string">"Days"</span>,</span><br><span class="line">     ylab = <span class="string">"survival"</span>,</span><br><span class="line">     main = <span class="string">"Patient Survival Curves"</span>)</span><br><span class="line"></span><br><span class="line">cols &lt;- colors()</span><br><span class="line"><span class="keyword">for</span> (n <span class="keyword">in</span> sample(c(<span class="number">2</span>:dim(vet)[<span class="number">1</span>]), <span class="number">20</span>))&#123;</span><br><span class="line">  lines(r_fit$unique.death.times, r_fit$survival[n,], type = <span class="string">"l"</span>, col = cols[n])</span><br><span class="line">&#125;</span><br><span class="line">lines(death_times, avg_prob, lwd = <span class="number">2</span>)</span><br><span class="line">legend(<span class="number">500</span>, <span class="number">0.7</span>, legend = c(<span class="string">'Average = black'</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-9-1.png" alt=""></p>
+<p>　　下面的代码块将展示<code>ranger()</code>是如何对变量的重要性进行排序的</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi &lt;- data.frame(sort(round(r_fit$variable.importance, <span class="number">4</span>), decreasing = <span class="literal">TRUE</span>))</span><br><span class="line">names(vi) &lt;- <span class="string">"importance"</span></span><br><span class="line">head(vi)</span><br></pre></td></tr></table></figure>
+<pre><code>##          importance
+## karno        0.0766
+## celltype     0.0319
+## trt          0.0003
+## diagtime     0.0003
+## prior       -0.0015
+## age         -0.0031
+</code></pre><p>　　注意到<code>ranger()</code>把<code>karno</code>和<code>celltype</code>当做两个最重要的变量，这两个变量在上面的Cox模型中同样拥有最小的p值；同样注意，重要性的结果只给出了变量名而没有给出具体水平，这是因为<code>ranger()</code>或者其他树模型不经常创建虚拟变量(dummy varaiable)。</p>
+<p>但是<code>ranger</code>计算了<a href="https://pdfs.semanticscholar.org/7705/392f1068c76669de750c6d0da8144da3304d.pdf" target="_blank" rel="noopener">Harrell’s c-index</a>（在370页有定义），和上面的一致性统计量(Corcondence statistic)相似，这是ROC曲线的一般化，它又降低了二元变量的 Wilcoxon-Mann-Whitney统计量，这又相当于计算ROC曲线下的面积 </p>
+<blockquote>
+<p>But <code>ranger()</code> does compute <a href="https://pdfs.semanticscholar.org/7705/392f1068c76669de750c6d0da8144da3304d.pdf" target="_blank" rel="noopener">Harrell’s c-index</a> (See [8] p. 370 for the definition), which is similar to the Concordance statistic described above. This is a generalization of the ROC curve, which reduces to the Wilcoxon-Mann-Whitney statistic for binary variables, which in turn, is equivalent to computing the area under the ROC curve.</p>
+</blockquote>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat(<span class="string">"Prediction Error = 1 - Harrell's c-index = "</span>, r_fit$prediction.error)</span><br></pre></td></tr></table></figure>
+<pre><code>## Prediction Error = 1 - Harrell&apos;s c-index =  0.3013403
+</code></pre><p>　　在第一次尝试中ROC值等0.68，在通常情况下这已经是一个不错的数了。但是注意，<code>ranger()</code>函数在建模时并没有对那些随时间变化的系数做任何处理，这显然是一个挑战。在一篇2011年的文章中，Hamad观察到： </p>
+<blockquote>
+<p>However, in the context of survival trees, a further difficulty arises when time–varying effects are included. Hence, we feel that the interpretation of covariate effects with tree ensembles in general is still mainly unsolved and should attract future research.</p>
+</blockquote>
+<p>　　然而在生存树的背景下，模型中包含随时间变化的效应成为了一个更大的问题。因此我们认为，对于树集模型中协变量的更一般的解释仍然是没有解决的，而且应该吸引后来者的更多研究。</p>
+<p>　　我相信，树型模型在生存分析中的主要应用应该是用于处理大数据集。 最后，我将把三种生存曲线绘制在一幅图形中，下面的代码将把三个模型对象中的生存数据取出并把他们置于同一个数据框中以便于<code>ggplot</code>绘图。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set up for ggplot</span></span><br><span class="line">kmi &lt;- rep(<span class="string">"KM"</span>,length(km_fit$time))</span><br><span class="line">km_df &lt;- data.frame(km_fit$time,km_fit$surv,kmi)</span><br><span class="line">names(km_df) &lt;- c(<span class="string">"Time"</span>,<span class="string">"Surv"</span>,<span class="string">"Model"</span>)</span><br><span class="line"></span><br><span class="line">coxi &lt;- rep(<span class="string">"Cox"</span>,length(cox_fit$time))</span><br><span class="line">cox_df &lt;- data.frame(cox_fit$time,cox_fit$surv,coxi)</span><br><span class="line">names(cox_df) &lt;- c(<span class="string">"Time"</span>,<span class="string">"Surv"</span>,<span class="string">"Model"</span>)</span><br><span class="line"></span><br><span class="line">rfi &lt;- rep(<span class="string">"RF"</span>,length(r_fit$unique.death.times))</span><br><span class="line">rf_df &lt;- data.frame(r_fit$unique.death.times,avg_prob,rfi)</span><br><span class="line">names(rf_df) &lt;- c(<span class="string">"Time"</span>,<span class="string">"Surv"</span>,<span class="string">"Model"</span>)</span><br><span class="line"></span><br><span class="line">plot_df &lt;- rbind(km_df,cox_df,rf_df)</span><br><span class="line"></span><br><span class="line">p &lt;- ggplot(plot_df, aes(x = Time, y = Surv, color = Model))</span><br><span class="line">p + geom_line()</span><br></pre></td></tr></table></figure>
+<p><img src="/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-12-1.png" alt=""><br>　　在这个数据集中，我将更相信一个精心构建的、考虑时间变化系数的Cox模型，我怀疑数据量和数据维度的不足限制了<code>ranger()</code>的发挥。</p>
+<p>　　以上四个包只是说明了R在生存分析中的工具作用，它们也确实展示了，在近20年的不断发展和改进中，R平台的丰富性。<code>ranger</code>包推荐了<code>survival</code>包，<code>ggfortify</code>包也是基于<code>ggplot2</code>构建的，展示了开源社区是如何帮助开发人员在前任的基础上继续工作的。<code>survival</code>包的随同文档，众多的在线资源，还有Concordance和Harrell’s c-index等被编入模型拟合结果的统计量，他们给出了R的几乎所有的统计深度。 </p>
+<blockquote>
+<p>…the statistics such as concordance and Harrell’s c-index packed into the objects produced by fitting the models gives some idea of the statistical depth that underlies almost everything R.</p>
+</blockquote>
+<h2 id="一些指导手册和论文"><a href="#一些指导手册和论文" class="headerlink" title="一些指导手册和论文"></a>一些指导手册和论文</h2><p>　　非常精美的基础生存分析教程，请看<a href="https://www.openintro.org/download.php?file=survival_analysis_in_R&amp;referrer=/stat/surv.php" target="_blank" rel="noopener">Survival analysis in R</a>，或者由<a href="https://www.openintro.org/download.php?file=survival_analysis_in_R&amp;referrer=/stat/surv.php" target="_blank" rel="noopener">OpenIntro</a>编写的<a href="https://cran.r-project.org/web/packages/OIsurv/index.html" target="_blank" rel="noopener"><code>OISurv</code></a>包（注：我们老师也给了..）。</p>
+<p>　　<a href="http://www.medicine.mcgill.ca/epidemiology/hanley/bios601/Encyclopedia%20of%20Biostatistics2ndEd2005.pdf" target="_blank" rel="noopener">这里</a>是对Aalen’s Additive Regression Model的介绍。</p>
+<p>　　一些可以用<code>ranger()</code>处理的预测性的生存分析模型的例子，一定要看一下Manuel Amunategui的<a href="http://amunategui.github.io/survival-ensembles/" target="_blank" rel="noopener">文章</a>和<a href="https://www.youtube.com/watch?v=6q-UFJUZK0g&amp;list=UUq4pm1i_VZqxKVVOz5qRBIA&amp;index=1" target="_blank" rel="noopener">视频</a>（注：视频需要翻墙）。</p>
+<p>　　感谢阅读。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">blog</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Survival Analysis</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">价值观</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">R Views</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://donk3yzz.com/2017/12/03/翻译：R中的生存分析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/11/24/first-success-plz/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
+
+  
+  
+  
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'true' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "bylRFwepsra1dbhjEKTVkram-gzGzoHsz",
+            app_key: "V4FD7ohjbYPhxJRpDydaa5TP",
+            placeholder: "请在这里输入评论...",
+            avatar:"retro"
+        });
+    }
+</script>
+    </section>
+  
 
 
           </div>
@@ -223,8 +480,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
