@@ -165,7 +165,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>　　本篇评论块开放，上一篇的评论问题很大还在解决…</p>
+        <p>　　评论区正式开放</p>
 <p>　　昨天逛<a href="https://rweekly.org/" target="_blank" rel="noopener">Rweekly</a>的时候发现了Rstudio社区里的这样一个帖子<a href="https://community.rstudio.com/t/what-are-your-favorite-rstudio-addins/1771" target="_blank" rel="noopener">What are your favorite Rstudio addins?</a>，然后就是一个恍然大明白，原来这个简单的图标里藏的还是有一些玄机的..</p>
 <p><img src="\img\r-studio-addins_files\addins.png" alt="Rstudio Addins"></p>
 <p>　　<a href="https://www.rstudio.com/resources/webinars/understanding-add-ins/" target="_blank" rel="noopener">Rstudio Addins</a>，按照官方的说法就是一个为了Rstudio用户们方便工作、定制他们专用的Rstudio界面的小插件，即  </p>
@@ -192,18 +192,7 @@
 <p><img src="/img/r-studio-addins_files/figure-markdown_github/unnamed-chunk-4-1.png" alt=""> 这张图虽然很好看，但是我想把坐标轴、图例都换成中文的，把底色换一下，再加上标题和支持怎么办？</p>
 <p>　　用<code>ggThemeAssist</code> 选中上面的<code>autoplot(km_trt_fit)</code>，然后点击Addins里面的ggplot Theme Assistant，就可以在里面调啊调了，记得最后点一下右上角的<code>Done</code>就好。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">autoplot(km_trt_fit) + theme(axis.text = element_text(face = <span class="string">"bold"</span>), </span><br><span class="line">    legend.text = element_text(face = <span class="string">"italic"</span>, </span><br><span class="line">        family = <span class="string">"CNS1"</span>), legend.title = element_text(face = <span class="string">"bold.italic"</span>, </span><br><span class="line">        family = <span class="string">"Times"</span>), legend.position = <span class="string">"left"</span>) +labs(title = <span class="string">"keplan-meier生存估计"</span>, x = <span class="string">"时间"</span>, </span><br><span class="line">    y = <span class="string">"生存概率"</span>, colour = <span class="string">"治疗"</span>, fill = <span class="string">"治疗"</span>, </span><br><span class="line">    caption = <span class="string">"powered by ggThemeAssist"</span>) + theme(panel.grid.major = element_line(linetype = <span class="string">"dashed"</span>), </span><br><span class="line">    panel.background = element_rect(fill = <span class="string">"khaki"</span>))</span><br></pre></td></tr></table></figure>
-<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, :
-## Windows字体数据库里没有这样的字体系列
-
-## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, :
-## Windows字体数据库里没有这样的字体系列
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x
-## $y, : Windows字体数据库里没有这样的字体系列
-
-## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x
-## $y, : Windows字体数据库里没有这样的字体系列
-</code></pre><p><img src="/img/r-studio-addins_files/figure-markdown_github/unnamed-chunk-5-1.png" alt=""><br>(其实也不怎么好看..主要是这个用法..)</p>
+<p><img src="/img/r-studio-addins_files/figure-markdown_github/unnamed-chunk-5-1.png" alt=""><br>(其实也不怎么好看..主要是这个用法..)</p>
 <p>　　工具的使用建立在用户对<code>ggplot</code>各种参数的了解之上，不过我觉得如果用这个Addins反向学习<code>ggplot</code>的各个参数应该也是可行的</p>
 <p>　　更多Addins的用法和更详细介绍可参考这些Addins中的GitHub主页，<a href="https://github.com/daattali/addinslist" target="_blank" rel="noopener">addinslist</a>,<a href="https://github.com/calligross/ggthemeassist" target="_blank" rel="noopener">ggThemeAssist</a>,<a href="https://github.com/r-lib/styler" target="_blank" rel="noopener">styler</a>。</p>
 <p>　　抛砖引玉，感谢阅读。</p>
@@ -682,19 +671,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">blog</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">价值观</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">R studio</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">little tips</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">blog</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">价值观</a>
               </li>
              
               <li class="article-tag-list-item">
