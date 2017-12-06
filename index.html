@@ -145,6 +145,125 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-r-studio-addins" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/06/r-studio-addins/">Rstudio的良苦用心之Addins</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/06/r-studio-addins/" class="archive-article-date">
+  	<time datetime="2017-12-06T05:15:03.312Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　本篇评论块开放，上一篇的评论问题很大还在解决…</p>
+<p>　　昨天逛<a href="https://rweekly.org/" target="_blank" rel="noopener">Rweekly</a>的时候发现了Rstudio社区里的这样一个帖子<a href="https://community.rstudio.com/t/what-are-your-favorite-rstudio-addins/1771" target="_blank" rel="noopener">What are your favorite Rstudio addins?</a>，然后就是一个恍然大明白，原来这个简单的图标里藏的还是有一些玄机的..</p>
+<p><img src="\img\r-studio-addins_files\addins.png" alt="Rstudio Addins"></p>
+<p>　　<a href="https://www.rstudio.com/resources/webinars/understanding-add-ins/" target="_blank" rel="noopener">Rstudio Addins</a>，按照官方的说法就是一个为了Rstudio用户们方便工作、定制他们专用的Rstudio界面的小插件，即  </p>
+<blockquote>
+<p>This powerful feature enables anyone who can write R code to customize RStudio for their own work.</p>
+</blockquote>
+<p>　　至于Addins的列表，有人在GitHub上做了总结而且做成了一个Addins，<a href="https://github.com/daattali/addinslist" target="_blank" rel="noopener"><code>addinslist</code></a>（好像有点绕，就是”an addin of addins”23333），我们可以按照各个Addins的说明各取所需，当然我们使用的第一个Addins就可以从这个入手</p>
+<h2 id="Browse-Rstudio-Addins"><a href="#Browse-Rstudio-Addins" class="headerlink" title="Browse Rstudio Addins"></a>Browse Rstudio Addins</h2><p>　　首先需要安装<code>addinslist</code>的包：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages(<span class="string">"addinslist"</span>)</span><br></pre></td></tr></table></figure>
+<p>　　安装成功之后点击R脚本框上面的Addins，就可以发现我们的第一个Addins了 </p>
+<p><img src="\img\r-studio-addins_files\browse rstudio addins.png" alt=""></p>
+<p>　　点击就会弹出一个窗口，里面就是各种各样的Rstudio Addins了，第一列是Addins名称，第二列是描述，第三列是包的名字，第四列中✔表示该包通过了CRAN的认可，然后就是作者和关于这个Addin的视频/截图/gif介绍了，其中绿色的是我们已经安装的，找到感兴趣的Addin单击即会提示安装。</p>
+<p><img src="\img\r-studio-addins_files\browse rstudio addins2.png" alt=""></p>
+<p>　　然后我们就可以通过搜索得到<code>styler</code>和<code>ggThemeAssist</code>并安装，下面的Addins演示将以这两个插件为例。</p>
+<h2 id="styler"><a href="#styler" class="headerlink" title="styler"></a>styler</h2><p>　　<a href="https://github.com/r-lib/styler" target="_blank" rel="noopener"><code>styler</code></a>是由GitHub organization <a href="https://github.com/r-lib" target="_blank" rel="noopener">R infrastructure</a>编写的（真·大佬organization），一个…治代码习惯的插件。不得不说，不好的代码习惯在编程（尤其是修改代码的时候）还是有点容易搞到自己的，也让读者或者合作者看起来特别头疼..就比如说我们的非参课本的程序，那一大坨看着简直不要太费劲.. 关于R语言代码格式，可以参考一下这篇<a href="http://mp.weixin.qq.com/s/kNEK2398OZ1D9PIY37iQMw" target="_blank" rel="noopener">是时候讨论一下代码规范性了</a>，louwill大佬毕竟这是我在某不怎么喜欢的公众号里最喜欢的一位作者。</p>
+<p>　　当然，通过上面<code>addinslist</code>的安装，我们现在有了<code>styler</code>，可以帮我们安排一下代码格式了 比如，现在在我们手里的是全国统计教材编审委员会“十二五”规划教材之《非参数统计学》第四版的符号检验函数</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sign.test &lt;- <span class="keyword">function</span>(x, pi, q0)</span><br><span class="line">&#123;s1=sum(x&lt;q0);s2=sum(x&gt;q0);n=s1+s2</span><br><span class="line">p1=pbinom(s1,n,p);p2=<span class="number">1</span>-pbinom(s1-<span class="number">1</span>,n,p)</span><br><span class="line"><span class="keyword">if</span> (p1&gt;p2)m1=<span class="string">"One tail test: H1:Q&gt;q0"</span></span><br><span class="line">  <span class="keyword">else</span> m1=<span class="string">"One tail test: H1:Q&lt;q0"</span></span><br><span class="line">p.value=min(p1,p2);m2=<span class="string">"Two tail test"</span>;p.value2=<span class="number">2</span>*p.value</span><br><span class="line"><span class="keyword">if</span> (q0==median(x))&#123;p.value=<span class="number">0.5</span>,p.value2=<span class="number">1</span>&#125;</span><br><span class="line">list(sign.test=m1, p.values.of.one.tail.test=p.value,</span><br><span class="line">p.value.of.two.tail.test=p.value2)&#125;</span><br></pre></td></tr></table></figure>
+<p>　　这是我按照P25页符号检验函数原封不动码下来的..视觉效果如何大家心里应该都有数反正我是心挺累的，如果不是强行挤印刷版面节约纸张保护环境的话，那只能说编者的不把大学生当人看了.. 当然我们现在有<code>styler</code>了，选中上面的符号函数，然后点击Addins里面的<code>Style Selection</code>，结果如下</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">sign.test &lt;- <span class="keyword">function</span>(x, pi, q0) &#123;</span><br><span class="line">  s1 &lt;- sum(x &lt; q0)</span><br><span class="line">  s2 &lt;- sum(x &gt; q0)</span><br><span class="line">  n &lt;- s1 + s2</span><br><span class="line">  p1 &lt;- pbinom(s1, n, p)</span><br><span class="line">  p2 &lt;- <span class="number">1</span> - pbinom(s1 - <span class="number">1</span>, n, p)</span><br><span class="line">  <span class="keyword">if</span> (p1 &gt; p2) &#123;</span><br><span class="line">    m1 &lt;- <span class="string">"One tail test: H1:Q&gt;q0"</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    m1 &lt;- <span class="string">"One tail test: H1:Q&lt;q0"</span></span><br><span class="line">  &#125;</span><br><span class="line">  p.value &lt;- min(p1, p2)</span><br><span class="line">  m2 &lt;- <span class="string">"Two tail test"</span></span><br><span class="line">  p.value2 &lt;- <span class="number">2</span> * p.value</span><br><span class="line">  <span class="keyword">if</span> (q0 == median(x)) &#123;</span><br><span class="line">    p.value &lt;- <span class="number">0.5</span></span><br><span class="line">    p.value2 &lt;- <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  list(</span><br><span class="line">    sign.test = m1, p.values.of.one.tail.test = p.value,</span><br><span class="line">    p.value.of.two.tail.test = p.value2</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　是不是舒服了很多，下一个。</p>
+<h2 id="ggThemeAssist"><a href="#ggThemeAssist" class="headerlink" title="ggThemeAssist"></a>ggThemeAssist</h2><p>　　下一个是<code>ggplot</code>系的辅助Addins<a href="https://github.com/calligross/ggthemeassist" target="_blank" rel="noopener"><code>ggThemeAssist</code></a>，<code>ggplot</code>是啥我就不讲了毕竟我真不是开公众号的..</p>
+<p>　　就以上篇文章里面的生存分析图型为例</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(survival)</span><br><span class="line"><span class="keyword">library</span>(ggplot2)</span><br><span class="line"><span class="keyword">library</span>(ggfortify)</span><br><span class="line">data(veteran)</span><br><span class="line"></span><br><span class="line">km_trt_fit &lt;- survfit(Surv(time, status) ~ trt, data=veteran)</span><br><span class="line">autoplot(km_trt_fit)</span><br></pre></td></tr></table></figure>
+<p><img src="/img/r-studio-addins_files/figure-markdown_github/unnamed-chunk-4-1.png" alt=""> 这张图虽然很好看，但是我想把坐标轴、图例都换成中文的，把底色换一下，再加上标题和支持怎么办？</p>
+<p>　　用<code>ggThemeAssist</code> 选中上面的<code>autoplot(km_trt_fit)</code>，然后点击Addins里面的ggplot Theme Assistant，就可以在里面调啊调了，记得最后点一下右上角的<code>Done</code>就好。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">autoplot(km_trt_fit) + theme(axis.text = element_text(face = <span class="string">"bold"</span>), </span><br><span class="line">    legend.text = element_text(face = <span class="string">"italic"</span>, </span><br><span class="line">        family = <span class="string">"CNS1"</span>), legend.title = element_text(face = <span class="string">"bold.italic"</span>, </span><br><span class="line">        family = <span class="string">"Times"</span>), legend.position = <span class="string">"left"</span>) +labs(title = <span class="string">"keplan-meier生存估计"</span>, x = <span class="string">"时间"</span>, </span><br><span class="line">    y = <span class="string">"生存概率"</span>, colour = <span class="string">"治疗"</span>, fill = <span class="string">"治疗"</span>, </span><br><span class="line">    caption = <span class="string">"powered by ggThemeAssist"</span>) + theme(panel.grid.major = element_line(linetype = <span class="string">"dashed"</span>), </span><br><span class="line">    panel.background = element_rect(fill = <span class="string">"khaki"</span>))</span><br></pre></td></tr></table></figure>
+<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, :
+## Windows字体数据库里没有这样的字体系列
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, :
+## Windows字体数据库里没有这样的字体系列
+
+## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x
+## $y, : Windows字体数据库里没有这样的字体系列
+
+## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x
+## $y, : Windows字体数据库里没有这样的字体系列
+</code></pre><p><img src="/img/r-studio-addins_files/figure-markdown_github/unnamed-chunk-5-1.png" alt=""><br>(其实也不怎么好看..主要是这个用法..)</p>
+<p>　　工具的使用建立在用户对<code>ggplot</code>各种参数的了解之上，不过我觉得如果用这个Addins反向学习<code>ggplot</code>的各个参数应该也是可行的</p>
+<p>　　更多Addins的用法和更详细介绍可参考这些Addins中的GitHub主页，<a href="https://github.com/daattali/addinslist" target="_blank" rel="noopener">addinslist</a>,<a href="https://github.com/calligross/ggthemeassist" target="_blank" rel="noopener">ggThemeAssist</a>,<a href="https://github.com/r-lib/styler" target="_blank" rel="noopener">styler</a>。</p>
+<p>　　抛砖引玉，感谢阅读。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">R studio</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">little tips</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/06/r-studio-addins/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-翻译：R中的生存分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -183,7 +302,7 @@
 ## 6   1 squamous   10      1    20        5  49     0
 </code></pre><p>　　<code>veteran</code>中的变量: - veteran 老兵 - trt: 1=standard 2=test - celltype: 1=squamous（鳞状的）, 2=small cell, 3=adeno（腺病毒）, 4=large - time: survival time in days - status: censoring status - karno: 卡氏方法评分 (100=good) - diagtime: months from diagnosis to randomization - age: in years - prior: 先前是否接受过治疗 0=no, 10=yes 注：<a href="http://www.hospicepatients.org/karnofsky.html" target="_blank" rel="noopener">karnofsky</a></p>
 <h2 id="Kaplan-Meier估计"><a href="#Kaplan-Meier估计" class="headerlink" title="Kaplan Meier估计"></a>Kaplan Meier估计</h2><p>　　首先是用<code>Surv()</code>函数建立标准的生存对象，<code>time</code>记录了生存时间；<code>status</code>表示患者死亡(status=1)或者生存时间删失(status=0)；下面<code>km</code>时间中的”+”表示时间是删失的。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Kaplan Meier Survival Curve</span></span><br><span class="line">km &lt;- with(veteran, Surv(time, status))</span><br><span class="line">head(km,<span class="number">80</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">km &lt;- with(veteran, Surv(time, status))</span><br><span class="line">head(km,<span class="number">80</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>##  [1]  72  411  228  126  118   10   82  110  314  100+  42    8  144   25+
 ## [15]  11   30  384    4   54   13  123+  97+ 153   59  117   16  151   22 
 ## [29]  56   21   18  139   20   31   52  287   18   51  122   27   54    7 
@@ -576,6 +695,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">R Views</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">R studio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">little tips</a>
               </li>
             
             <div class="clearfix"></div>

@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-7-1.png">
 <meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-9-1.png">
 <meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-12-1.png">
-<meta property="og:updated_time" content="2017-12-03T15:46:40.047Z">
+<meta property="og:updated_time" content="2017-12-06T05:41:33.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：R-Views Survival analysis with R">
 <meta name="twitter:description" content="原文来自R Views-Survival analysis with R，侵..侵删？ 　　Survival analysis的起源可以追溯到1662年，一位名为John Graunt的伦敦商人基于手中的死亡记录数据发布了一系列的推断，这使得生存分析成为统计学最古老的分枝之一。在十八世纪以前，基本生命表方法，包括处理删失数据的技巧被人们发现；十八世纪早期，那些大师们的工作（de Moivre对">
@@ -191,7 +191,7 @@
 ## 6   1 squamous   10      1    20        5  49     0
 </code></pre><p>　　<code>veteran</code>中的变量: - veteran 老兵 - trt: 1=standard 2=test - celltype: 1=squamous（鳞状的）, 2=small cell, 3=adeno（腺病毒）, 4=large - time: survival time in days - status: censoring status - karno: 卡氏方法评分 (100=good) - diagtime: months from diagnosis to randomization - age: in years - prior: 先前是否接受过治疗 0=no, 10=yes 注：<a href="http://www.hospicepatients.org/karnofsky.html" target="_blank" rel="noopener">karnofsky</a></p>
 <h2 id="Kaplan-Meier估计"><a href="#Kaplan-Meier估计" class="headerlink" title="Kaplan Meier估计"></a>Kaplan Meier估计</h2><p>　　首先是用<code>Surv()</code>函数建立标准的生存对象，<code>time</code>记录了生存时间；<code>status</code>表示患者死亡(status=1)或者生存时间删失(status=0)；下面<code>km</code>时间中的”+”表示时间是删失的。</p>
-<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Kaplan Meier Survival Curve</span></span><br><span class="line">km &lt;- with(veteran, Surv(time, status))</span><br><span class="line">head(km,<span class="number">80</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">km &lt;- with(veteran, Surv(time, status))</span><br><span class="line">head(km,<span class="number">80</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>##  [1]  72  411  228  126  118   10   82  110  314  100+  42    8  144   25+
 ## [15]  11   30  384    4   54   13  123+  97+ 153   59  117   16  151   22 
 ## [29]  56   21   18  139   20   31   52  287   18   51  122   27   54    7 
@@ -397,6 +397,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2017/12/06/r-studio-addins/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Rstudio的良苦用心之Addins
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/11/24/first-success-plz/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Hello World</div>
@@ -436,6 +445,27 @@
 
   
   
+  
+    <section id="comments" style="margin:10px;padding:10px;background:#fff;">
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "bylRFwepsra1dbhjEKTVkram-gzGzoHsz",
+            app_key: "V4FD7ohjbYPhxJRpDydaa5TP",
+            placeholder: "请在这里输入评论...",
+            avatar:"retro"
+        });
+    }
+</script>
+    </section>
   
 
 
@@ -563,6 +593,14 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">R Views</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">R studio</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">little tips</a>
               </li>
             
             <div class="clearfix"></div>
