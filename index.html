@@ -145,33 +145,155 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-员工离职问题分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-2018-03-05-rmarkdown的中文实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/14/员工离职问题分析/">企业员工离职问题分析——基于RSF方法</a>
+      <a class="article-title" href="/2018/03/05/2018-03-05-rmarkdown的中文实现/">Rmarkdown的中文实现</a>
     </h1>
   
 
         
-        <a href="/2018/01/14/员工离职问题分析/" class="archive-article-date">
-  	<time datetime="2018-01-13T17:18:58.476Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+        <a href="/2018/03/05/2018-03-05-rmarkdown的中文实现/" class="archive-article-date">
+  	<time datetime="2018-03-05T00:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这篇真的是攒了好久了23333</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>一时不知从何说起。。</p>
+        <p>我这个行为准确来讲叫蹭热度…</p>
+<h2 id="Rmarkdown的中文输出"><a href="#Rmarkdown的中文输出" class="headerlink" title="Rmarkdown的中文输出"></a>Rmarkdown的中文输出</h2><p>Rmarkdown因为结合了markdown标记语言的特性和R代码块而被广泛使用，不过使用Rmarkdown输出中文PDF却是一件令人头疼的事情，不经过配置的Rstudio直接knit输出pdf文件，中文部分会是一片空白。</p>
+<p>虽然这个问题已经找到了可靠的解决办法，不过随着<code>tinytex</code>的诞生，这个实现又多了一种轻量级的方法。</p>
+<h2 id="中文输出空白简单原因"><a href="#中文输出空白简单原因" class="headerlink" title="中文输出空白简单原因"></a>中文输出空白简单原因</h2><p>在Rstudio中，Rmarkdown的输出是基于<code>knitr</code>实现（这也就不奇怪为什么输出按钮名为“knit”），而<code>knitr</code>的实现rmd输出为pdf机理大概是：</p>
+<ul>
+<li>首先运行代码块，将rmd文件转换为md文件</li>
+<li>调用pandoc，将md转换为pdf文件</li>
+</ul>
+<p>所以问题大概就出在第二步，pandoc实现从md到pdf的转换需要使用Latex引擎，而后者对于中文的支持…有目共睹，所以需要一个比较可靠的解决办法。</p>
+<p>而友链里已经躺着了一篇<a href="https://www.jianshu.com/p/3a1d95f9965a" target="_blank" rel="noopener">Rmarkdown中文实现
+</a>给出了一种比较普遍的解决方法，不过需要修正两点：</p>
+<ul>
+<li>第二步中，不需要手动安装pandoc</li>
+<li>第三步中，需要安装完整版的MikTex</li>
+</ul>
+<p>关于第二条，Rstudio在安装时已经附带了pandoc，所以无需手动安装；第三条安装完整的MikTex是谢大推荐，而完整版的MikTex的体型巨大，占用系统资源不说，下载与安装过程都十分耗费时间。</p>
+<h2 id="比较轻量的中文实现过程"><a href="#比较轻量的中文实现过程" class="headerlink" title="比较轻量的中文实现过程"></a>比较轻量的中文实现过程</h2><p>更轻量的Rmarkdown中文实现过程基于谢大新开发的<code>tinytex</code>(<a href="https://yihui.name/tinytex/cn/" target="_blank" rel="noopener">中文文档</a>)，目前已经在cran上发布。</p>
+<p>中文文档中的描述如下：</p>
+<blockquote>
+<p>TinyTeX 是一个瘦身版的TeX Live。TeX Live 的庞大体型问题困扰我多年，在 2018 年之前我终于抽出一周时间来解决这个问题，其实方案很简单：把对普通用户毫无用处的源代码和文档去掉即可。具体技术细节参见常见问题，总体而言就是利用了TeX Live 的自动化安装方式，配置文件中设置不要安装源文件和文档。<br>TinyTeX 假设你不惧怕或反感使用命令行，但其实需要的命令行指令并不复杂，常见任务都可以通过一行命令搞定。如果不清楚如何打开系统命令行窗口，请参见常见问题。</p>
+</blockquote>
+<p>不过在下载与使用前需要注意，谢大不推荐在一个电脑上同时配置多个Tex软件，如果使用tinytex，需要将电脑上原有的MikTex/TexLive/Ctex卸载。这样也意味着，如果今后有Latex的使用需求，需要完全基于tinytex实现，可能需要对tinytex的使用有一定的掌握（使用Rmarkdown来实现latex编写论文暂时是不易实现的）。</p>
+<p>在<code>tinytex</code>的使用中出现问题可以在<a href="https://github.com/yihui/tinytex" target="_blank" rel="noopener">其github</a>的issue中提问。</p>
+<p>好了下面是正题，基于<code>tinytex</code>的Rmarkdown中文实现方式和原理与前面文章中大致相同：</p>
+<h3 id="下载Rstudio和rmarkdown"><a href="#下载Rstudio和rmarkdown" class="headerlink" title="下载Rstudio和rmarkdown"></a>下载Rstudio和<code>rmarkdown</code></h3><p>直接利用cran安装<code>rmarkdown</code>即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages(&apos;rmarkdown&apos;)</span><br></pre></td></tr></table></figure>
+<p>如果安装受阻可以尝试更新R（推荐使用<code>installr::updater()</code>），或使用devtools下载。</p>
+<h3 id="下载安装tinytex"><a href="#下载安装tinytex" class="headerlink" title="下载安装tinytex"></a>下载安装<code>tinytex</code></h3><p>运行下面代码，然后等待</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">install.packages(&quot;tinytex&quot;)</span><br><span class="line">tinytex::install_tinytex()</span><br></pre></td></tr></table></figure>
+<p>Windows系统需要10分钟左右的下载安装时间，取决于网速，下载完成后重启Rstudio（或重启电脑..）然后运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tinytex:::is_tinytex()</span><br></pre></td></tr></table></figure>
+<p>如果返回<code>TRUE</code>则证明安装完成，即可进行下一步。</p>
+<h3 id="使用Rmarkdown模版包rticles"><a href="#使用Rmarkdown模版包rticles" class="headerlink" title="使用Rmarkdown模版包rticles"></a>使用Rmarkdown模版包<code>rticles</code></h3><p>首先需要下载Rmarkdown模版包<code>rticles</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install.packages(&quot;rticles&quot;)</span><br></pre></td></tr></table></figure>
+<p>在上面步骤全部完成的前提下，点击左上角新建，选择Rmarkdown</p>
+<p><img src="/img/Rmarkdown中文实现/img_1.png" alt=""></p>
+<p>在弹出的对话框左侧选择From Template，然后选择Ctex Document，点击OK</p>
+<p><img src="/img/Rmarkdown中文实现/img_2.png" alt=""></p>
+<p>然后我们就得到了一个Rmarkdown的中文模版，其中有一些Ctex document介绍和简单的Rmarkdown介绍。将author, title和正文编辑为我们需要的内容，点击Knit按钮，如果语法没有问题，一篇基于Ctex的R语言pdf中文文档将完成。</p>
+<p><img src="/img/Rmarkdown中文实现/img_3.png" alt=""></p>
+<h3 id="首次使用"><a href="#首次使用" class="headerlink" title="首次使用"></a>首次使用</h3><p>如果是第一次使用基于<code>tinytex</code>的Rmarkdown，点击Knit时，我们将看到类似于<code>tinytex</code>安装时的情景，这是<code>tinytex</code>开始工作，它会下载运行Ctex模版所需的latex文件，下载与安装完成后，将会得到所需pdf</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>注：谢大，即谢益辉，<code>knitr</code>,<code>tinytex</code>等包作者，<code>rmarkdown</code>,<code>rticles</code>等包重要贡献者，本人偶像。</p>
+<p>应该是受思维和语言表达能力的限制，感觉自己废话是真的多…</p>
+<p>感谢观看</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">R studio</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">little tips</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/05/2018-03-05-rmarkdown的中文实现/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-2018-01-14-员工离职问题分析-基于rsf" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/14/2018-01-14-员工离职问题分析-基于rsf/">企业员工离职问题分析——基于RSF方法</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/14/2018-01-14-员工离职问题分析-基于rsf/" class="archive-article-date">
+  	<time datetime="2018-01-14T00:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这篇真的是攒了好久了</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一时不知从何说起。。</p>
 <p>简单解释一下吧，生存分析起源于Daniel Bernoulli对于接种天花风险的研究，经过不断的改进后拥有了处理删失数据的能力；而time-to-event 模型中，自变量是时间、协变量是影响该事件发生的各种因素，而多数情况下我们更关注协变量对于事件发生的影响。生存分析目前被广泛的应用于生物和医疗统计、工程、保险、市场营销等领域。</p>
 <p>随机生存森林方法(Random Survival Forest, 下面简称RSF)方法是在随机森林分类方法的基础上，对协变量进行分类的。在一个多分类模型系统 , 随机森林系统的最终分类结果采用简单多数投票法，而RSF是在最后利用Harrel’s C Index 或者logrank统计量来衡量生存结局的差异。</p>
 <p>至于RSF方法的优势，大致就可以分为两类，一类是生存分析模型的优势，一类是随机森林的优势。RSF方法的第一类优势就在于可以建立time-to-event模型，也拥有了处理删失数据的能力；第二类优势则来源于随机森林方法对于高维数据的处理能力。</p>
 <p>其实我在写生存分析论文的时候是很典型的带着方法找问题，为了RSF方法的优势在“高纬”、“大数据量”、“生存分析”、“实证研究”等标签下苦苦寻觅，最后只剩下一点感想就是，time-to-event的模型的适用范围真的比想象中小很多，加上协变量不依赖于时间的要求，剩下能发挥的领域真的简直是不能更窄，想在经济领域运用的话大概只有员工离职问题、用户退订问题和企业寿命问题比较好下手。。</p>
-<p>所以我就找到了这份数据，来源于kaggle:<a href="https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset" target="_blank" rel="noopener">IBM HR Analytics Employee Attrition &amp; Performance</a> ，是IBM数据科学家做的一份人力资源的虚拟数据，其中包括30多个变量和1470个观测值。RSF可能不是处理这个问题最好的方法，这个页面下下有显然有预测精度更高的基于随机森林或者XGboost的处理，然而我只能用RSF。。但是文章都要写了我好歹也得夸一下是不，RSF算法处理员工离职问题的主要优势有以下几条：</p>
+<p>所以我就找到了这份数据，来源于kaggle:<a href="https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset" target="_blank" rel="noopener">IBM HR Analytics Employee Attrition &amp; Performance
+</a><br>，是IBM数据科学家做的一份人力资源的虚拟数据，其中包括30多个变量和1470个观测值。RSF可能不是处理这个问题最好的方法，这个页面下下有显然有预测精度更高的基于随机森林或者XGboost的处理，然而我只能用RSF。。但是文章都要写了我好歹也得夸一下是不，RSF算法处理员工离职问题的主要优势有以下几条：</p>
 <ul>
 <li>员工离职问题是比较符合time-to-event模型</li>
 <li>将未离职员工视为删失是一种不错的选择</li>
@@ -180,169 +302,58 @@
 <li>不需要考虑各协变量间的交互影响</li>
 </ul>
 <p>自夸结束，下面是RSF的原理和方法。</p>
-<h1 id="RSF原理与方法"><a href="#RSF原理与方法" class="headerlink" title="RSF原理与方法"></a>RSF原理与方法</h1><p>随机生存森林是在随机森林基础上，加入生存分析，采用bootstrap方法从原始数据中有放回的随机抽取<em>N</em><sub><em>tree</em></sub>个样本，对每个样本都建立一个二元递归生存树。每个自助样本平均不包含37%的原始数据，将这些数据成为袋外数据（OOB数据），作为RSF的测试样本。最后按照上述方法建立<em>N</em><sub><em>tree</em></sub>棵生存树，并将这些树的结果进行综合。RSF算法可以使用R包<code>ranger</code>实现。</p>
-<p>假设在树节<em>h</em>上有<em>n</em><sub><em>h</em></sub>例样本，(<em>T</em><sub>1</sub>, <em>δ</em><sub>1</sub>), ⋯, (<em>T</em><sub><em>n</em></sub>, <em>δ</em><sub><em>n</em></sub>)表示他们的生存时间和截尾信息，<em>δ</em><sub><em>i</em></sub> = 0表示个体<em>i</em>在时间<em>T</em><sub><em>i</em></sub>时右删失，<em>δ</em><sub><em>i</em></sub> = 1表示在时间<em>T</em><sub><em>i</em></sub>时死亡，则给定的一个变量<em>X</em><sub><em>j</em></sub>(<em>j</em> = 1, 2, ⋯, <em>m</em>)，在节点<em>h</em>处可以根据<em>X</em><sub><em>j</em></sub> &lt; <em>c</em>和<em>X</em><sub><em>j</em></sub> &gt; <em>c</em>将生存数据分为两组数据。 RSF在每棵树的节点处，只随机抽取<em>M</em><sub><em>t<strong>r</strong>y</em></sub>个变量作为分割节点的候选变量，选择使子节点生存差异最大的变量。树节点分裂准则采用Harrell’s C Index分裂方法，或者logrank分裂方法，计算生存函数采用Nelson-Aalen或者Kaplan-Meier估计方法。</p>
-<h1 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h1><p>载入需要的包</p>
+<h2 id="RSF原理与方法"><a href="#RSF原理与方法" class="headerlink" title="RSF原理与方法"></a>RSF原理与方法</h2><p>随机生存森林是在随机森林基础上，加入生存分析，采用bootstrap方法从原始数据中有放回的随机抽取<script type="math/tex">N_{tree}</script>个样本，对每个样本都建立一个二元递归生存树。每个自助样本平均不包含37%的原始数据，将这些数据成为袋外数据（OOB数据），作为RSF的测试样本。最后按照上述方法建立$N_{tree}$棵生存树，并将这些树的结果进行综合。RSF算法可以使用R包<code>ranger</code>实现。</p>
+<p>假设在树节<script type="math/tex">h</script>上有<script type="math/tex">n_{h}</script>例样本，<script type="math/tex">(T_{1}, \delta_{1})</script>, <script type="math/tex">\cdots</script>, <script type="math/tex">(T_{n}, \delta_{n})</script>表示他们的生存时间和截尾信息，<script type="math/tex">\delta_i=0</script>表示个体<script type="math/tex">i</script>在时间<script type="math/tex">T_i</script>时右删失，<script type="math/tex">\delta_i=1</script>表示在时间<script type="math/tex">T_i</script>时死亡，则给定的一个变量<script type="math/tex">X_j( j=1,2,\cdots,m)</script>，在节点<script type="math/tex">h</script>处可以根据<script type="math/tex">X_j<c</script>和<script type="math/tex">X_j>c</script>将生存数据分为两组数据。 RSF在每棵树的节点处，只随机抽取<script type="math/tex">M_{try}</script>个变量作为分割节点的候选变量，选择使子节点生存差异最大的变量。树节点分裂准则采用Harrell’s C Index分裂方法，或者logrank分裂方法，计算生存函数采用Nelson-Aalen或者Kaplan-Meier估计方法。</p>
+<h2 id="数据清洗"><a href="#数据清洗" class="headerlink" title="数据清洗"></a>数据清洗</h2><p>载入需要的包</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">library</span>(dplyr)      <span class="comment">#数据清洗</span></span><br><span class="line"><span class="keyword">library</span>(survival)   <span class="comment">#生存函数</span></span><br><span class="line"><span class="keyword">library</span>(ggfortify)  <span class="comment">#绘制生存函数图</span></span><br><span class="line"><span class="keyword">library</span>(ranger)     <span class="comment">#实现RSF算法</span></span><br><span class="line"><span class="keyword">library</span>(ggalluvial) <span class="comment">#绘制桑基图</span></span><br></pre></td></tr></table></figure>
 <p>这里应该推荐一下，<code>dplyr</code>包用于数据清洗真的是特别好用，提供了一整套的数据清洗流程，其中的<code>filter</code>,<code>select</code>,<code>mutate</code>,<code>summarize</code>和<code>%&gt;%</code>管道等函数使得数据清洗变得非常易于操作，代码可读性也大大增加，不得不说Hadley实在是改变R语言的男人…</p>
 <p>读取数据，并查看数据结构</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HR_data &lt;- read.csv(file = <span class="string">"HR-Employee-Attrition.csv"</span>, header = <span class="literal">T</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## Warning in file(file, &quot;rt&quot;): 无法打开文件&apos;HR-Employee-Attrition.csv&apos;:</span><br><span class="line">## No such file or directory</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Error in file(file, &quot;rt&quot;): 无法打开链结</span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str(HR_data)</span><br></pre></td></tr></table></figure>
-<pre><code>## &apos;data.frame&apos;:    1470 obs. of  35 variables:
-##  $ Age                     : int  41 49 37 33 27 32 59 30 38 36 ...
-##  $ Attrition               : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 1 2 1 1 1 1 1 1 1 ...
-##  $ BusinessTravel          : Factor w/ 3 levels &quot;Non-Travel&quot;,&quot;Travel_Frequently&quot;,..: 3 2 3 2 3 2 3 3 2 3 ...
-##  $ DailyRate               : int  1102 279 1373 1392 591 1005 1324 1358 216 1299 ...
-##  $ Department              : Factor w/ 3 levels &quot;Human Resources&quot;,..: 3 2 2 2 2 2 2 2 2 2 ...
-##  $ DistanceFromHome        : int  1 8 2 3 2 2 3 24 23 27 ...
-##  $ Education               : int  2 1 2 4 1 2 3 1 3 3 ...
-##  $ EducationField          : Factor w/ 6 levels &quot;Human Resources&quot;,..: 2 2 5 2 4 2 4 2 2 4 ...
-##  $ EmployeeCount           : int  1 1 1 1 1 1 1 1 1 1 ...
-##  $ EmployeeNumber          : int  1 2 4 5 7 8 10 11 12 13 ...
-##  $ EnvironmentSatisfaction : int  2 3 4 4 1 4 3 4 4 3 ...
-##  $ Gender                  : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 1 2 2 1 2 2 1 2 2 2 ...
-##  $ HourlyRate              : int  94 61 92 56 40 79 81 67 44 94 ...
-##  $ JobInvolvement          : int  3 2 2 3 3 3 4 3 2 3 ...
-##  $ JobLevel                : int  2 2 1 1 1 1 1 1 3 2 ...
-##  $ JobRole                 : Factor w/ 9 levels &quot;Healthcare Representative&quot;,..: 8 7 3 7 3 3 3 3 5 1 ...
-##  $ JobSatisfaction         : int  4 2 3 3 2 4 1 3 3 3 ...
-##  $ MaritalStatus           : Factor w/ 3 levels &quot;Divorced&quot;,&quot;Married&quot;,..: 3 2 3 2 2 3 2 1 3 2 ...
-##  $ MonthlyIncome           : int  5993 5130 2090 2909 3468 3068 2670 2693 9526 5237 ...
-##  $ MonthlyRate             : int  19479 24907 2396 23159 16632 11864 9964 13335 8787 16577 ...
-##  $ NumCompaniesWorked      : int  8 1 6 1 9 0 4 1 0 6 ...
-##  $ Over18                  : Factor w/ 1 level &quot;Y&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ OverTime                : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 1 2 2 1 1 2 1 1 1 ...
-##  $ PercentSalaryHike       : int  11 23 15 11 12 13 20 22 21 13 ...
-##  $ PerformanceRating       : int  3 4 3 3 3 3 4 4 4 3 ...
-##  $ RelationshipSatisfaction: int  1 4 2 3 4 3 1 2 2 2 ...
-##  $ StandardHours           : int  80 80 80 80 80 80 80 80 80 80 ...
-##  $ StockOptionLevel        : int  0 1 0 0 1 0 3 1 0 2 ...
-##  $ TotalWorkingYears       : int  8 10 7 8 6 8 12 1 10 17 ...
-##  $ TrainingTimesLastYear   : int  0 3 3 3 3 2 3 2 2 3 ...
-##  $ WorkLifeBalance         : int  1 3 3 3 3 2 2 3 3 2 ...
-##  $ YearsAtCompany          : int  6 10 0 8 2 7 1 1 9 7 ...
-##  $ YearsInCurrentRole      : int  4 7 0 7 2 7 0 0 7 7 ...
-##  $ YearsSinceLastPromotion : int  0 1 0 3 2 3 0 0 1 7 ...
-##  $ YearsWithCurrManager    : int  5 7 0 0 2 6 0 0 8 7 ...
-</code></pre><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary(HR_data)</span><br></pre></td></tr></table></figure>
-<pre><code>##       Age        Attrition            BusinessTravel   DailyRate     
-##  Min.   :18.00   No :1233   Non-Travel       : 150   Min.   : 102.0  
-##  1st Qu.:30.00   Yes: 237   Travel_Frequently: 277   1st Qu.: 465.0  
-##  Median :36.00              Travel_Rarely    :1043   Median : 802.0  
-##  Mean   :36.92                                       Mean   : 802.5  
-##  3rd Qu.:43.00                                       3rd Qu.:1157.0  
-##  Max.   :60.00                                       Max.   :1499.0  
-##                                                                      
-##                   Department  DistanceFromHome   Education    
-##  Human Resources       : 63   Min.   : 1.000   Min.   :1.000  
-##  Research &amp; Development:961   1st Qu.: 2.000   1st Qu.:2.000  
-##  Sales                 :446   Median : 7.000   Median :3.000  
-##                               Mean   : 9.193   Mean   :2.913  
-##                               3rd Qu.:14.000   3rd Qu.:4.000  
-##                               Max.   :29.000   Max.   :5.000  
-##                                                               
-##           EducationField EmployeeCount EmployeeNumber  
-##  Human Resources : 27    Min.   :1     Min.   :   1.0  
-##  Life Sciences   :606    1st Qu.:1     1st Qu.: 491.2  
-##  Marketing       :159    Median :1     Median :1020.5  
-##  Medical         :464    Mean   :1     Mean   :1024.9  
-##  Other           : 82    3rd Qu.:1     3rd Qu.:1555.8  
-##  Technical Degree:132    Max.   :1     Max.   :2068.0  
-##                                                        
-##  EnvironmentSatisfaction    Gender      HourlyRate     JobInvolvement
-##  Min.   :1.000           Female:588   Min.   : 30.00   Min.   :1.00  
-##  1st Qu.:2.000           Male  :882   1st Qu.: 48.00   1st Qu.:2.00  
-##  Median :3.000                        Median : 66.00   Median :3.00  
-##  Mean   :2.722                        Mean   : 65.89   Mean   :2.73  
-##  3rd Qu.:4.000                        3rd Qu.: 83.75   3rd Qu.:3.00  
-##  Max.   :4.000                        Max.   :100.00   Max.   :4.00  
-##                                                                      
-##     JobLevel                          JobRole    JobSatisfaction
-##  Min.   :1.000   Sales Executive          :326   Min.   :1.000  
-##  1st Qu.:1.000   Research Scientist       :292   1st Qu.:2.000  
-##  Median :2.000   Laboratory Technician    :259   Median :3.000  
-##  Mean   :2.064   Manufacturing Director   :145   Mean   :2.729  
-##  3rd Qu.:3.000   Healthcare Representative:131   3rd Qu.:4.000  
-##  Max.   :5.000   Manager                  :102   Max.   :4.000  
-##                  (Other)                  :215                  
-##   MaritalStatus MonthlyIncome    MonthlyRate    NumCompaniesWorked
-##  Divorced:327   Min.   : 1009   Min.   : 2094   Min.   :0.000     
-##  Married :673   1st Qu.: 2911   1st Qu.: 8047   1st Qu.:1.000     
-##  Single  :470   Median : 4919   Median :14236   Median :2.000     
-##                 Mean   : 6503   Mean   :14313   Mean   :2.693     
-##                 3rd Qu.: 8379   3rd Qu.:20462   3rd Qu.:4.000     
-##                 Max.   :19999   Max.   :26999   Max.   :9.000     
-##                                                                   
-##  Over18   OverTime   PercentSalaryHike PerformanceRating
-##  Y:1470   No :1054   Min.   :11.00     Min.   :3.000    
-##           Yes: 416   1st Qu.:12.00     1st Qu.:3.000    
-##                      Median :14.00     Median :3.000    
-##                      Mean   :15.21     Mean   :3.154    
-##                      3rd Qu.:18.00     3rd Qu.:3.000    
-##                      Max.   :25.00     Max.   :4.000    
-##                                                         
-##  RelationshipSatisfaction StandardHours StockOptionLevel TotalWorkingYears
-##  Min.   :1.000            Min.   :80    Min.   :0.0000   Min.   : 0.00    
-##  1st Qu.:2.000            1st Qu.:80    1st Qu.:0.0000   1st Qu.: 6.00    
-##  Median :3.000            Median :80    Median :1.0000   Median :10.00    
-##  Mean   :2.712            Mean   :80    Mean   :0.7939   Mean   :11.28    
-##  3rd Qu.:4.000            3rd Qu.:80    3rd Qu.:1.0000   3rd Qu.:15.00    
-##  Max.   :4.000            Max.   :80    Max.   :3.0000   Max.   :40.00    
-##                                                                           
-##  TrainingTimesLastYear WorkLifeBalance YearsAtCompany   YearsInCurrentRole
-##  Min.   :0.000         Min.   :1.000   Min.   : 0.000   Min.   : 0.000    
-##  1st Qu.:2.000         1st Qu.:2.000   1st Qu.: 3.000   1st Qu.: 2.000    
-##  Median :3.000         Median :3.000   Median : 5.000   Median : 3.000    
-##  Mean   :2.799         Mean   :2.761   Mean   : 7.008   Mean   : 4.229    
-##  3rd Qu.:3.000         3rd Qu.:3.000   3rd Qu.: 9.000   3rd Qu.: 7.000    
-##  Max.   :6.000         Max.   :4.000   Max.   :40.000   Max.   :18.000    
-##                                                                           
-##  YearsSinceLastPromotion YearsWithCurrManager
-##  Min.   : 0.000          Min.   : 0.000      
-##  1st Qu.: 0.000          1st Qu.: 2.000      
-##  Median : 1.000          Median : 3.000      
-##  Mean   : 2.188          Mean   : 4.123      
-##  3rd Qu.: 3.000          3rd Qu.: 7.000      
-##  Max.   :15.000          Max.   :17.000      
-## 
-</code></pre><p>首先我们需要关注的两个变量<code>Attrition</code>和<code>YearsAtCompany</code>是我们在构建生存对象时要用到的event和time，需要将他们调整到正确的形式；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">## &apos;data.frame&apos;:	1470 obs. of  30 variables:</span><br><span class="line">##  $ Age                     : int  41 49 37 33 27 32 59 30 38 36 ...</span><br><span class="line">##  $ Attrition               : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 1 2 1 1 1 1 1 1 1 ...</span><br><span class="line">##  $ BusinessTravel          : Factor w/ 3 levels &quot;Non-Travel&quot;,&quot;Travel_Frequently&quot;,..: 3 2 3 2 3 2 3 3 2 3 ...</span><br><span class="line">##  $ DailyRate               : int  1102 279 1373 1392 591 1005 1324 1358 216 1299 ...</span><br><span class="line">##  $ Department              : Factor w/ 3 levels &quot;Human Resources&quot;,..: 3 2 2 2 2 2 2 2 2 2 ...</span><br><span class="line">##  $ DistanceFromHome        : int  1 8 2 3 2 2 3 24 23 27 ...</span><br><span class="line">##  $ Education               : Factor w/ 5 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 2 1 2 4 1 2 3 1 3 3 ...</span><br><span class="line">##  $ EducationField          : Factor w/ 6 levels &quot;Human Resources&quot;,..: 2 2 5 2 4 2 4 2 2 4 ...</span><br><span class="line">##  $ EmployeeCount           : Factor w/ 1 level &quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...</span><br><span class="line">##  $ EmployeeNumber          : int  1 2 4 5 7 8 10 11 12 13 ...</span><br><span class="line">##  $ EnvironmentSatisfaction : Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 2 3 4 4 1 4 3 4 4 3 ...</span><br><span class="line">##  $ Gender                  : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 1 2 2 1 2 2 1 2 2 2 ...</span><br><span class="line">##  $ HourlyRate              : int  94 61 92 56 40 79 81 67 44 94 ...</span><br><span class="line">##  $ JobInvolvement          : Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 3 2 2 3 3 3 4 3 2 3 ...</span><br><span class="line">##  $ JobLevel                : Factor w/ 5 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 2 2 1 1 1 1 1 1 3 2 ...</span><br><span class="line">##  $ JobRole                 : Factor w/ 9 levels &quot;Healthcare Representative&quot;,..: 8 7 3 7 3 3 3 3 5 1 ...</span><br><span class="line">##  $ JobSatisfaction         : Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 4 2 3 3 2 4 1 3 3 3 ...</span><br><span class="line">##  $ MaritalStatus           : Factor w/ 3 levels &quot;Divorced&quot;,&quot;Married&quot;,..: 3 2 3 2 2 3 2 1 3 2 ...</span><br><span class="line">##  $ MonthlyIncome           : int  5993 5130 2090 2909 3468 3068 2670 2693 9526 5237 ...</span><br><span class="line">##  $ MonthlyRate             : int  19479 24907 2396 23159 16632 11864 9964 13335 8787 16577 ...</span><br><span class="line">##  $ NumCompaniesWorked      : int  8 1 6 1 9 0 4 1 0 6 ...</span><br><span class="line">##  $ OverTime                : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 2 1 2 2 1 1 2 1 1 1 ...</span><br><span class="line">##  $ PercentSalaryHike       : int  11 23 15 11 12 13 20 22 21 13 ...</span><br><span class="line">##  $ PerformanceRating       : Factor w/ 2 levels &quot;3&quot;,&quot;4&quot;: 1 2 1 1 1 1 2 2 2 1 ...</span><br><span class="line">##  $ RelationshipSatisfaction: Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 1 4 2 3 4 3 1 2 2 2 ...</span><br><span class="line">##  $ StockOptionLevel        : Factor w/ 4 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 1 2 1 1 2 1 4 2 1 3 ...</span><br><span class="line">##  $ TotalWorkingYears       : int  8 10 7 8 6 8 12 1 10 17 ...</span><br><span class="line">##  $ TrainingTimesLastYear   : int  0 3 3 3 3 2 3 2 2 3 ...</span><br><span class="line">##  $ WorkLifeBalance         : Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 1 3 3 3 3 2 2 3 3 2 ...</span><br><span class="line">##  $ time                    : int  6 10 0 8 2 7 1 1 9 7 ...</span><br></pre></td></tr></table></figure>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summary(HR_data)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">##       Age       Attrition           BusinessTravel   DailyRate   </span><br><span class="line">##  Min.   :18.0   0:1233    Non-Travel       : 150   Min.   : 102  </span><br><span class="line">##  1st Qu.:30.0   1: 237    Travel_Frequently: 277   1st Qu.: 465  </span><br><span class="line">##  Median :36.0             Travel_Rarely    :1043   Median : 802  </span><br><span class="line">##  Mean   :36.9                                      Mean   : 802  </span><br><span class="line">##  3rd Qu.:43.0                                      3rd Qu.:1157  </span><br><span class="line">##  Max.   :60.0                                      Max.   :1499  </span><br><span class="line">##                                                                  </span><br><span class="line">##                   Department  DistanceFromHome Education</span><br><span class="line">##  Human Resources       : 63   Min.   : 1.00    1:170    </span><br><span class="line">##  Research &amp; Development:961   1st Qu.: 2.00    2:282    </span><br><span class="line">##  Sales                 :446   Median : 7.00    3:572    </span><br><span class="line">##                               Mean   : 9.19    4:398    </span><br><span class="line">##                               3rd Qu.:14.00    5: 48    </span><br><span class="line">##                               Max.   :29.00             </span><br><span class="line">##                                                         </span><br><span class="line">##           EducationField EmployeeCount EmployeeNumber</span><br><span class="line">##  Human Resources : 27    1:1470        Min.   :   1  </span><br><span class="line">##  Life Sciences   :606                  1st Qu.: 491  </span><br><span class="line">##  Marketing       :159                  Median :1020  </span><br><span class="line">##  Medical         :464                  Mean   :1025  </span><br><span class="line">##  Other           : 82                  3rd Qu.:1556  </span><br><span class="line">##  Technical Degree:132                  Max.   :2068  </span><br><span class="line">##                                                      </span><br><span class="line">##  EnvironmentSatisfaction    Gender      HourlyRate    JobInvolvement</span><br><span class="line">##  1:284                   Female:588   Min.   : 30.0   1: 83         </span><br><span class="line">##  2:287                   Male  :882   1st Qu.: 48.0   2:375         </span><br><span class="line">##  3:453                                Median : 66.0   3:868         </span><br><span class="line">##  4:446                                Mean   : 65.9   4:144         </span><br><span class="line">##                                       3rd Qu.: 83.8                 </span><br><span class="line">##                                       Max.   :100.0                 </span><br><span class="line">##                                                                     </span><br><span class="line">##  JobLevel                      JobRole    JobSatisfaction</span><br><span class="line">##  1:543    Sales Executive          :326   1:289          </span><br><span class="line">##  2:534    Research Scientist       :292   2:280          </span><br><span class="line">##  3:218    Laboratory Technician    :259   3:442          </span><br><span class="line">##  4:106    Manufacturing Director   :145   4:459          </span><br><span class="line">##  5: 69    Healthcare Representative:131                  </span><br><span class="line">##           Manager                  :102                  </span><br><span class="line">##           (Other)                  :215                  </span><br><span class="line">##   MaritalStatus MonthlyIncome    MonthlyRate    NumCompaniesWorked</span><br><span class="line">##  Divorced:327   Min.   : 1009   Min.   : 2094   Min.   :0.00      </span><br><span class="line">##  Married :673   1st Qu.: 2911   1st Qu.: 8047   1st Qu.:1.00      </span><br><span class="line">##  Single  :470   Median : 4919   Median :14236   Median :2.00      </span><br><span class="line">##                 Mean   : 6503   Mean   :14313   Mean   :2.69      </span><br><span class="line">##                 3rd Qu.: 8379   3rd Qu.:20462   3rd Qu.:4.00      </span><br><span class="line">##                 Max.   :19999   Max.   :26999   Max.   :9.00      </span><br><span class="line">##                                                                   </span><br><span class="line">##  OverTime   PercentSalaryHike PerformanceRating</span><br><span class="line">##  No :1054   Min.   :11.0      3:1244           </span><br><span class="line">##  Yes: 416   1st Qu.:12.0      4: 226           </span><br><span class="line">##             Median :14.0                       </span><br><span class="line">##             Mean   :15.2                       </span><br><span class="line">##             3rd Qu.:18.0                       </span><br><span class="line">##             Max.   :25.0                       </span><br><span class="line">##                                                </span><br><span class="line">##  RelationshipSatisfaction StockOptionLevel TotalWorkingYears</span><br><span class="line">##  1:276                    0:631            Min.   : 0.0     </span><br><span class="line">##  2:303                    1:596            1st Qu.: 6.0     </span><br><span class="line">##  3:459                    2:158            Median :10.0     </span><br><span class="line">##  4:432                    3: 85            Mean   :11.3     </span><br><span class="line">##                                            3rd Qu.:15.0     </span><br><span class="line">##                                            Max.   :40.0     </span><br><span class="line">##                                                             </span><br><span class="line">##  TrainingTimesLastYear WorkLifeBalance      time      </span><br><span class="line">##  Min.   :0.0           1: 80           Min.   : 0.00  </span><br><span class="line">##  1st Qu.:2.0           2:344           1st Qu.: 3.00  </span><br><span class="line">##  Median :3.0           3:893           Median : 5.00  </span><br><span class="line">##  Mean   :2.8           4:153           Mean   : 7.01  </span><br><span class="line">##  3rd Qu.:3.0                           3rd Qu.: 9.00  </span><br><span class="line">##  Max.   :6.0                           Max.   :40.00  </span><br><span class="line">##</span><br></pre></td></tr></table></figure>
+<p>首先我们需要关注的两个变量<code>Attrition</code>和<code>YearsAtCompany</code>是我们在构建生存对象时要用到的event和time，需要将他们调整到正确的形式；</p>
 <p>其次，这个数据集中存在着很多分类变量如Eduction,JobLevel等，是用阿拉伯数字1,2,3,4,5表示等级的（但不会大于5），但是其变量类型为int，需要调整为factor，否则无法建立模型；</p>
 <p>另外变量中存在着一些无效变量和一部分明显依赖于时间的协变量，需要删除；</p>
 <p>还有一些比较重要的依赖于时间的变量如<code>Age</code>,<code>MonthlyIncom</code>需要调整进行归类处理。</p>
 <p>可以判断，如果一个int型变量的所有数据都小于5，则该变量的正确类型应该为factor，可以自编函数<code>ifgt5()</code>进行判断并利用<code>mutate_if()</code>对变量类型进行转换。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ifgt5 &lt;- <span class="keyword">function</span>(x) &#123;</span><br><span class="line">  <span class="keyword">if</span> (is.factor(x)) &#123;</span><br><span class="line">    <span class="keyword">return</span>(<span class="literal">F</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (any(x &gt; <span class="number">5</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span>(<span class="literal">F</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span>(<span class="literal">T</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HR_data &lt;- HR_data %&gt;%</span><br><span class="line">  <span class="comment">#对time和event进行处理</span></span><br><span class="line">  mutate(time = YearsAtCompany,</span><br><span class="line">         Attrition = ifelse(Attrition == <span class="string">"Yes"</span>, <span class="number">1</span>, <span class="number">0</span>)) %&gt;%</span><br><span class="line">  <span class="comment">#删除无效变量和明显依赖于时间的变量</span></span><br><span class="line">  select(-Over18,-StandardHours,</span><br><span class="line">         -(YearsAtCompany:YearsWithCurrManager),</span><br><span class="line">         -TotalWorkingYears) %&gt;%</span><br><span class="line">  <span class="comment">#将全部数值小于等于5的int型变量转换为factor型</span></span><br><span class="line">  mutate_if(a, factor)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## Error in mutate_impl(.data, dots): Binding not found: YearsAtCompany.</span><br></pre></td></tr></table></figure>
 <p>对<code>Age</code>,<code>salary</code>等变量进行分层处理</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hr_data &lt;- HR_data %&gt;%</span><br><span class="line">  mutate(Age = ifelse((Age&lt;=<span class="number">30</span>), <span class="string">"youth"</span>,</span><br><span class="line">                ifelse((Age&lt;=<span class="number">40</span>), <span class="string">"prime"</span>,</span><br><span class="line">                ifelse((Age&lt;=<span class="number">50</span>), <span class="string">"middle"</span>, <span class="string">"old"</span>))),</span><br><span class="line">         salary = ifelse(MonthlyIncome&lt;<span class="number">4000</span>, <span class="string">"low"</span>,</span><br><span class="line">                  ifelse(MonthlyIncome&lt;<span class="number">8000</span>, <span class="string">"medium"</span>,</span><br><span class="line">                  ifelse(MonthlyIncome&lt;<span class="number">12000</span>, <span class="string">"high"</span>, <span class="string">"rich"</span>)))) %&gt;%</span><br><span class="line">  select(-MonthlyIncome)</span><br></pre></td></tr></table></figure>
-<h1 id="建立RSF模型"><a href="#建立RSF模型" class="headerlink" title="建立RSF模型"></a>建立RSF模型</h1><p>完成了数据清洗之后，我们就可以对问题建立RSF模型</p>
+<h2 id="建立RSF模型"><a href="#建立RSF模型" class="headerlink" title="建立RSF模型"></a>建立RSF模型</h2><p>完成了数据清洗之后，我们就可以对问题建立RSF模型</p>
 <p>首先建立生存对象和模型所需的formula。</p>
 <p>这里有一个问题是之前没有遇到过的，一次在模型中加入20多个协变量如果挨个输入建立formula实在是..所以可以利用<code>paste0()</code>和数据框的变量名直接建立字符串，然后用<code>as.formula()</code>公式化，得到的<code>fml1</code>就可以直接用于<code>ranger()</code></p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#建立生存对象</span></span><br><span class="line">hr_surv &lt;- Surv(time = hr_data$time, hr_data$Attrition==<span class="number">1</span>)</span><br><span class="line"><span class="comment">#建立formula</span></span><br><span class="line">fml1 &lt;- paste0(c(<span class="string">"hr_surv~Age"</span>,names(hr_data)[<span class="number">3</span>:<span class="number">27</span>],<span class="string">"salary"</span>),collapse = <span class="string">'+'</span>) %&gt;%</span><br><span class="line">  as.formula()</span><br></pre></td></tr></table></figure>
-<h2 id="忙活了这么多终于可以回归了…"><a href="#忙活了这么多终于可以回归了…" class="headerlink" title="忙活了这么多终于可以回归了…"></a>忙活了这么多终于可以回归了…</h2><p>用<code>ranger</code>进行RSF回归，其中每棵树随机抽取的变量数<em>M</em><sub><em>t<strong>r</strong>y</em></sub> = 5，计算VIMP值的方法采用permutation置换，分裂准则采用Harrel’s C Index。</p>
+<h2 id="忙活了这么多终于可以回归了…"><a href="#忙活了这么多终于可以回归了…" class="headerlink" title="忙活了这么多终于可以回归了…"></a>忙活了这么多终于可以回归了…</h2><p>用<code>ranger</code>进行RSF回归，其中每棵树随机抽取的变量数$M_{try}=5$，计算VIMP值的方法采用permutation置换，分裂准则采用Harrel’s C Index。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">r_fit &lt;- ranger(</span><br><span class="line">  formula = fml1,</span><br><span class="line">  data = hr_data,</span><br><span class="line">  mtry = <span class="number">5</span>,</span><br><span class="line">  importance = <span class="string">"permutation"</span>,</span><br><span class="line">  splitrule = <span class="string">"C"</span>,</span><br><span class="line">  verbose = <span class="literal">TRUE</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>RSF方法不能建立出参数的数学模型，但是会对每个观测值都拟合生存曲线，下面我们随机抽取100个拟合生存曲线并用<code>ggplot</code>作图。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#提取拟合的生存曲线</span></span><br><span class="line">death_times &lt;- r_fit$unique.death.times </span><br><span class="line">surv_prob &lt;- data.frame(r_fit$survival)</span><br></pre></td></tr></table></figure>
 <p>不过这中间涉及到一个数据表类型的问题，为了方便画图我们需要使用<code>reshape2::melt()</code>将数据转化为长型数据，关于数据表类型和之间的优劣处、相互转换，以后会专门写。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">surv_prob[sample(<span class="number">1470</span>,<span class="number">100</span>),] %&gt;%</span><br><span class="line">  t %&gt;%</span><br><span class="line">  cbind(., time = death_times) %&gt;%</span><br><span class="line">  `row.names&lt;-`(<span class="literal">NULL</span>) %&gt;%</span><br><span class="line">  reshape2::melt(id = <span class="string">"time"</span>)%&gt;%</span><br><span class="line">  subset(value &lt; <span class="number">1</span>) %&gt;%</span><br><span class="line">  ggplot(aes(x = Var1, y = value, color = Var2)) + </span><br><span class="line">  geom_line()  + theme(legend.position = <span class="string">"none"</span>) +</span><br><span class="line">  labs(x = <span class="string">"survival time"</span>, y = <span class="string">"prob of being on the job"</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="/img/员工离职问题分析_files/figure-markdown_github/unnamed-chunk-10-1.png" alt=""></p>
-<h2 id="Harrell’s-C-Index评价模型"><a href="#Harrell’s-C-Index评价模型" class="headerlink" title="Harrell’s C Index评价模型"></a>Harrell’s C Index评价模型</h2><p>Harrell’s C Index（简单介绍在<a href="http://www.statisticshowto.com/c-statistic/" target="_blank" rel="noopener">这里</a>）是在ROC曲线下面积的基础上发展而来，它估计了预测结果与实际观察到的结果相一致的概率，所以也可以作为RSF的分裂标准（<a href="https://ac.els-cdn.com/S0957417416303633/1-s2.0-S0957417416303633-main.pdf?_tid=4bace9c6-f839-11e7-858d-00000aacb35d&amp;acdnat=1515831251_eebdeff11abe217215e7be6940503859" target="_blank" rel="noopener">Matthias Schmid,2016</a>）。一般C值大于0.7就证明这是一个好的模型，大于0.8就说明是一个强模型，如果能答到1就是完美模型了。</p>
+<p><img src="/figure/posts/2018-01-14-员工离职问题分析-基于rsf/unnamed-chunk-10-1.png" alt="plot of chunk unnamed-chunk-10"></p>
+<h3 id="Harrell’s-C-Index评价模型"><a href="#Harrell’s-C-Index评价模型" class="headerlink" title="Harrell’s C Index评价模型"></a>Harrell’s C Index评价模型</h3><p>Harrell’s C Index（简单介绍在<a href="http://www.statisticshowto.com/c-statistic/" target="_blank" rel="noopener">这里</a>）是在ROC曲线下面积的基础上发展而来，它估计了预测结果与实际观察到的结果相一致的概率，所以也可以作为RSF的分裂标准（<a href="https://ac.els-cdn.com/S0957417416303633/1-s2.0-S0957417416303633-main.pdf?_tid=4bace9c6-f839-11e7-858d-00000aacb35d&amp;acdnat=1515831251_eebdeff11abe217215e7be6940503859" target="_blank" rel="noopener">Matthias Schmid,2016</a>）。一般C值大于0.7就证明这是一个好的模型，大于0.8就说明是一个强模型，如果能答到1就是完美模型了。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>-r_fit$prediction.error</span><br></pre></td></tr></table></figure>
-<pre><code>## [1] 0.7571121
-</code></pre><p>Harrell’ C Index 达到了0.7571，说明这个模型已经具有比较优秀的预测性质了。</p>
-<h2 id="VIMP值"><a href="#VIMP值" class="headerlink" title="VIMP值"></a>VIMP值</h2><p>重要性评分(VIMP值)是用来衡量预测变量预测能力的一个评价，可以依据变量的重要性（VIMP）对变量进行筛选， VIMP值越大表明其预测能力越强。不过需要注意的是，VIMP值并不是一个参数或者统计量，，VIMP的大小只是一个相对值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## [1] 0.7571</span><br></pre></td></tr></table></figure>
+<p>Harrell’ C Index 达到了0.7571，说明这个模型已经具有比较优秀的预测性质了。</p>
+<h3 id="VIMP值"><a href="#VIMP值" class="headerlink" title="VIMP值"></a>VIMP值</h3><p>重要性评分(VIMP值)是用来衡量预测变量预测能力的一个评价，可以依据变量的重要性（VIMP）对变量进行筛选， VIMP值越大表明其预测能力越强。不过需要注意的是，VIMP值并不是一个参数或者统计量，，VIMP的大小只是一个相对值。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi &lt;- data.frame(sort(round(r_fit$variable.importance, <span class="number">4</span>), decreasing = <span class="literal">TRUE</span>))</span><br><span class="line">names(vi) &lt;- <span class="string">"importance"</span></span><br><span class="line"></span><br><span class="line">vi %&gt;%</span><br><span class="line">  mutate(name = rownames(vi)) %&gt;%</span><br><span class="line">  mutate(name = factor(name, </span><br><span class="line">                       levels = name)) %&gt;%</span><br><span class="line">  ggplot(aes(x = name, y = importance)) +</span><br><span class="line">  geom_bar(stat = <span class="string">"identity"</span>) + coord_flip()</span><br></pre></td></tr></table></figure>
-<p><img src="/img/员工离职问题分析_files/figure-markdown_github/unnamed-chunk-12-1.png" alt=""></p>
-<h2 id="使用桑基图进行解释"><a href="#使用桑基图进行解释" class="headerlink" title="使用桑基图进行解释"></a>使用桑基图进行解释</h2><p>使用过cox模型的人应该都会关注模型的解释，在cox模型里会给出某个变量中具体观察值的显著性，使用者可以轻易的判断其中到底哪个水平对于生存的影响更显著。而在RSF方法中，VIMP值只是衡量了该变量在预测中的相对重要程度，不能无法知道变量中是哪个具体水平起影响作用，比如我们就无法判断<code>JobLevel</code>中到底是高的职务等级还是低的离职概率更大。（在课程展示里面蹩到我的部分）</p>
+<p><img src="/figure/posts/2018-01-14-员工离职问题分析-基于rsf/unnamed-chunk-12-1.png" alt="plot of chunk unnamed-chunk-12"></p>
+<h3 id="使用桑基图进行解释"><a href="#使用桑基图进行解释" class="headerlink" title="使用桑基图进行解释"></a>使用桑基图进行解释</h3><p>使用过cox模型的人应该都会关注模型的解释，在cox模型里会给出某个变量中具体观察值的显著性，使用者可以轻易的判断其中到底哪个水平对于生存的影响更显著。而在RSF方法中，VIMP值只是衡量了该变量在预测中的相对重要程度，不能无法知道变量中是哪个具体水平起影响作用，比如我们就无法判断<code>JobLevel</code>中到底是高的职务等级还是低的离职概率更大。（在课程展示里面蹩到我的部分）</p>
 <p>于是我开始寻找能够比较直观的展示，于是就找到了桑基图这个载体（本来想用平行坐标(parallel coordinate)图方法但是这个方法对于分类变量的适应能力比较差，如果是连续性变量就可以使用）。使用<code>ggalluvial</code>包实现，可以参考<a href="http://corybrunson.github.io/ggalluvial/articles/ggalluvial.html" target="_blank" rel="noopener">这篇</a>。</p>
 <p>选取VIMP值排名前五的变量，和<code>Attrition</code>一起构建桑基图。</p>
 <p>首先需要将数据调整至alluvia格式，还是利用<code>dplyr</code>中的分组统计，</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hrdata &lt;-hr_data %&gt;%</span><br><span class="line">  select(Attrition, time, rownames(vi)[<span class="number">1</span>:<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line">hr &lt;- hrdata %&gt;%</span><br><span class="line">  <span class="comment">#按照次序排列工资水平</span></span><br><span class="line">  mutate(salary = factor(salary, </span><br><span class="line">                         levels = c(<span class="string">"low"</span>, <span class="string">"medium"</span>, <span class="string">"high"</span>, <span class="string">"rich"</span>))) %&gt;%</span><br><span class="line">  group_by(Attrition, OverTime, </span><br><span class="line">           JobLevel, salary, </span><br><span class="line">           StockOptionLevel, MaritalStatus) %&gt;%</span><br><span class="line">  summarise(n = n())</span><br></pre></td></tr></table></figure>
 <p>绘制桑基图，并添加图例坐标。</p>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">hr %&gt;%</span><br><span class="line">  ggplot(aes(weight = n, </span><br><span class="line">           axis7 = Attrition, axis6 = OverTime, </span><br><span class="line">           axis4 = salary, axis5 = JobLevel,</span><br><span class="line">           axis3 = StockOptionLevel, </span><br><span class="line">           axis2 = MaritalStatus)) +</span><br><span class="line">  geom_alluvium(aes(fill = Attrition), width = <span class="number">1</span>/<span class="number">12</span>) +</span><br><span class="line">  geom_stratum(width = <span class="number">1</span>/<span class="number">12</span>, fill = <span class="string">"black"</span>, color = <span class="string">"grey"</span>) +</span><br><span class="line">  geom_label(stat = <span class="string">"stratum"</span>, label.strata = <span class="literal">TRUE</span>) +</span><br><span class="line">  scale_x_continuous(breaks = <span class="number">1</span>:<span class="number">6</span>,</span><br><span class="line">                     labels = c(<span class="string">"MaritalStatus"</span>,</span><br><span class="line">                                <span class="string">"StockOptionLevel"</span>, <span class="string">"SalaryLevel"</span>,</span><br><span class="line">                                 <span class="string">"JobLevel"</span>, <span class="string">"overtime"</span>, <span class="string">"Attrition"</span>))</span><br></pre></td></tr></table></figure>
-<p><img src="/img/员工离职问题分析_files/figure-markdown_github/unnamed-chunk-14-1.png" alt=""></p>
+<p><img src="/figure/posts/2018-01-14-员工离职问题分析-基于rsf/unnamed-chunk-14-1.png" alt="plot of chunk unnamed-chunk-14"></p>
 <p>然后我们大概就可以假装分析一番了：公司中大量加班者更倾向于离职，而且加班应该是对于员工离职的影响最大的因素；职务水平低的人，其工作往往具有较强的可替代性，所以该员工群的流动率最大，而低薪金水平和股权水平似乎也反映了同样的问题。在离职问题中，工作压力、职务级别、薪金水平等组织因素相较于个人因素往往具有更大的影响力，工作压力越大者越倾向于离职，这基本是其他学者在论文中共同认可的观点，而现在我们以实证的角度给这一观点提供了更具有说明力的证明。</p>
 <p>反正这种级别的解释..显然是怎么都能解释出道理的对吧hhhh</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>所以我们来梳理一下这篇文章的方法结构，首先在正确认识模型的前提下对数据进行处理，然后用RSF方法对企业人力资源数据进行回归处理，得到了每个观测值的生存曲线拟合、一个预测模型（暂时没用到）和各变量的VIMP值，利用VIMP值筛选重要变量结合桑基图进一步解释。所以我们主要完成的是一个数据处理+数据降维+绘图解释的过程，中间浪费掉的预测模型会在下一篇捡起来用。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>所以我们来梳理一下这篇文章的方法结构，首先在正确认识模型的前提下对数据进行处理，然后用RSF方法对企业人力资源数据进行回归处理，得到了每个观测值的生存曲线拟合、一个预测模型（暂时没用到）和各变量的VIMP值，利用VIMP值筛选重要变量结合桑基图进一步解释。所以我们主要完成的是一个数据处理+数据降维+绘图解释的过程，中间浪费掉的预测模型会在下一篇捡起来用。</p>
 <p>以为在论文的基础上随便写一下就好的，没想到整了一天，复习周作案 真的是打扰了。</p>
 <p>如果存在细节方面的疑问，或者哪个部分需要参考文档可以尽管在评论中提出。</p>
 <p>感谢阅读。</p>
@@ -359,10 +370,6 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Survival Analysis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RSF</a>
         		</li>
       		 
@@ -377,7 +384,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/14/员工离职问题分析/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/01/14/2018-01-14-员工离职问题分析-基于rsf/">展开全文 >></a>
         </p>
       
 
@@ -604,7 +611,7 @@
 ## age               -8.706e-03  9.913e-01  9.300e-03 -0.936  0.34920    
 ## priorYes           7.159e-02  1.074e+00  2.323e-01  0.308  0.75794    
 ## ---
-## Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &apos;.&apos; 0.1 &apos; &apos; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ##                   exp(coef) exp(-coef) lower .95 upper .95
 ## trttest              1.3426     0.7448    0.8939    2.0166
@@ -655,7 +662,7 @@
 <p>But <code>ranger()</code> does compute <a href="https://pdfs.semanticscholar.org/7705/392f1068c76669de750c6d0da8144da3304d.pdf" target="_blank" rel="noopener">Harrell’s c-index</a> (See [8] p. 370 for the definition), which is similar to the Concordance statistic described above. This is a generalization of the ROC curve, which reduces to the Wilcoxon-Mann-Whitney statistic for binary variables, which in turn, is equivalent to computing the area under the ROC curve.</p>
 </blockquote>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat(<span class="string">"Prediction Error = 1 - Harrell's c-index = "</span>, r_fit$prediction.error)</span><br></pre></td></tr></table></figure>
-<pre><code>## Prediction Error = 1 - Harrell&apos;s c-index =  0.3013403
+<pre><code>## Prediction Error = 1 - Harrell&#39;s c-index =  0.3013403
 </code></pre><p>　　在第一次尝试中ROC值等0.68，在通常情况下这已经是一个不错的数了。但是注意，<code>ranger()</code>函数在建模时并没有对那些随时间变化的系数做任何处理，这显然是一个挑战。在一篇2011年的文章中，Hamad观察到： </p>
 <blockquote>
 <p>However, in the context of survival trees, a further difficulty arises when time–varying effects are included. Hence, we feel that the interpretation of covariate effects with tree ensembles in general is still mainly unsolved and should attract future research.</p>
@@ -861,25 +868,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 
 <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';                 
+        }       
+    });
+    </script>
+    
+    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
 
     
 <div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
@@ -933,10 +938,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Survival Analysis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RSF</a>
               </li>
              
@@ -958,6 +959,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">价值观</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Survival Analysis</a>
               </li>
              
               <li class="article-tag-list-item">

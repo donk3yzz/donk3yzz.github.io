@@ -242,7 +242,7 @@
 ## age               -8.706e-03  9.913e-01  9.300e-03 -0.936  0.34920    
 ## priorYes           7.159e-02  1.074e+00  2.323e-01  0.308  0.75794    
 ## ---
-## Signif. codes:  0 &apos;***&apos; 0.001 &apos;**&apos; 0.01 &apos;*&apos; 0.05 &apos;.&apos; 0.1 &apos; &apos; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ##                   exp(coef) exp(-coef) lower .95 upper .95
 ## trttest              1.3426     0.7448    0.8939    2.0166
@@ -293,7 +293,7 @@
 <p>But <code>ranger()</code> does compute <a href="https://pdfs.semanticscholar.org/7705/392f1068c76669de750c6d0da8144da3304d.pdf" target="_blank" rel="noopener">Harrell’s c-index</a> (See [8] p. 370 for the definition), which is similar to the Concordance statistic described above. This is a generalization of the ROC curve, which reduces to the Wilcoxon-Mann-Whitney statistic for binary variables, which in turn, is equivalent to computing the area under the ROC curve.</p>
 </blockquote>
 <figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat(<span class="string">"Prediction Error = 1 - Harrell's c-index = "</span>, r_fit$prediction.error)</span><br></pre></td></tr></table></figure>
-<pre><code>## Prediction Error = 1 - Harrell&apos;s c-index =  0.3013403
+<pre><code>## Prediction Error = 1 - Harrell&#39;s c-index =  0.3013403
 </code></pre><p>　　在第一次尝试中ROC值等0.68，在通常情况下这已经是一个不错的数了。但是注意，<code>ranger()</code>函数在建模时并没有对那些随时间变化的系数做任何处理，这显然是一个挑战。在一篇2011年的文章中，Hamad观察到： </p>
 <blockquote>
 <p>However, in the context of survival trees, a further difficulty arises when time–varying effects are included. Hence, we feel that the interpretation of covariate effects with tree ensembles in general is still mainly unsolved and should attract future research.</p>
@@ -508,25 +508,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 
 <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';                 
+        }       
+    });
+    </script>
+    
+    <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
 
     
 <div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
@@ -580,10 +578,6 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Survival Analysis</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RSF</a>
               </li>
              
@@ -605,6 +599,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">价值观</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Survival Analysis</a>
               </li>
              
               <li class="article-tag-list-item">
