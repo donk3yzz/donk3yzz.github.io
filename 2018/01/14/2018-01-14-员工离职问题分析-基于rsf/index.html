@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="https://donk3yzz.com">
   <title>企业员工离职问题分析——基于RSF方法 | 乐观的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这篇真的是攒了好久了 前言一时不知从何说起。。 简单解释一下吧，生存分析起源于Daniel Bernoulli对于接种天花风险的研究，经过不断的改进后拥有了处理删失数据的能力；而time-to-event 模型中，自变量是时间、协变量是影响该事件发生的各种因素，而多数情况下我们更关注协变量对于事件发生的影响。生存分析目">
+  <meta name="description" content="这篇真的是攒了好久了">
 <meta name="keywords" content="RSF,diagrams">
 <meta property="og:type" content="article">
 <meta property="og:title" content="企业员工离职问题分析——基于RSF方法">
 <meta property="og:url" content="https://donk3yzz.com/2018/01/14/2018-01-14-员工离职问题分析-基于rsf/index.html">
 <meta property="og:site_name" content="乐观的blog">
-<meta property="og:description" content="这篇真的是攒了好久了 前言一时不知从何说起。。 简单解释一下吧，生存分析起源于Daniel Bernoulli对于接种天花风险的研究，经过不断的改进后拥有了处理删失数据的能力；而time-to-event 模型中，自变量是时间、协变量是影响该事件发生的各种因素，而多数情况下我们更关注协变量对于事件发生的影响。生存分析目前被广泛的应用于生物和医疗统计、工程、保险、市场营销等领域。 随机生存森林方法(">
+<meta property="og:description" content="这篇真的是攒了好久了">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://donk3yzz.com/figure/posts/2018-01-14-员工离职问题分析-基于rsf/unnamed-chunk-10-1.png">
 <meta property="og:image" content="https://donk3yzz.com/figure/posts/2018-01-14-员工离职问题分析-基于rsf/unnamed-chunk-12-1.png">
 <meta property="og:image" content="https://donk3yzz.com/figure/posts/2018-01-14-员工离职问题分析-基于rsf/unnamed-chunk-14-1.png">
-<meta property="og:updated_time" content="2018-02-02T11:01:13.037Z">
+<meta property="og:updated_time" content="2018-03-05T15:21:43.553Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="企业员工离职问题分析——基于RSF方法">
-<meta name="twitter:description" content="这篇真的是攒了好久了 前言一时不知从何说起。。 简单解释一下吧，生存分析起源于Daniel Bernoulli对于接种天花风险的研究，经过不断的改进后拥有了处理删失数据的能力；而time-to-event 模型中，自变量是时间、协变量是影响该事件发生的各种因素，而多数情况下我们更关注协变量对于事件发生的影响。生存分析目前被广泛的应用于生物和医疗统计、工程、保险、市场营销等领域。 随机生存森林方法(">
+<meta name="twitter:description" content="这篇真的是攒了好久了">
 <meta name="twitter:image" content="https://donk3yzz.com/figure/posts/2018-01-14-员工离职问题分析-基于rsf/unnamed-chunk-10-1.png">
   
     <link rel="alternative" href="/atom.xml" title="乐观的blog" type="application/atom+xml">
@@ -170,6 +170,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>这篇真的是攒了好久了</p>
+<a id="more"></a>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一时不知从何说起。。</p>
 <p>简单解释一下吧，生存分析起源于Daniel Bernoulli对于接种天花风险的研究，经过不断的改进后拥有了处理删失数据的能力；而time-to-event 模型中，自变量是时间、协变量是影响该事件发生的各种因素，而多数情况下我们更关注协变量对于事件发生的影响。生存分析目前被广泛的应用于生物和医疗统计、工程、保险、市场营销等领域。</p>
 <p>随机生存森林方法(Random Survival Forest, 下面简称RSF)方法是在随机森林分类方法的基础上，对协变量进行分类的。在一个多分类模型系统 , 随机森林系统的最终分类结果采用简单多数投票法，而RSF是在最后利用Harrel’s C Index 或者logrank统计量来衡量生存结局的差异。</p>
@@ -508,19 +509,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RSF</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diagrams</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">R studio</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">little tips</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RSF</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">diagrams</a>
               </li>
              
               <li class="article-tag-list-item">

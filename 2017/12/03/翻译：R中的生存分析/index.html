@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="https://donk3yzz.com">
   <title>翻译：R-Views Survival analysis with R | 乐观的blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原文来自R Views-Survival analysis with R，侵..侵删？ 　　Survival analysis的起源可以追溯到1662年，一位名为John Graunt的伦敦商人基于手中的死亡记录数据发布了一系列的推断，这使得生存分析成为统计学最古老的分枝之一。在十八世纪以前，基本生命表方法，包括处理删">
+  <meta name="description" content="原文来自R Views-Survival analysis with R，侵..侵删？">
 <meta name="keywords" content="Survival Analysis,R Views">
 <meta property="og:type" content="article">
 <meta property="og:title" content="翻译：R-Views Survival analysis with R">
 <meta property="og:url" content="https://donk3yzz.com/2017/12/03/翻译：R中的生存分析/index.html">
 <meta property="og:site_name" content="乐观的blog">
-<meta property="og:description" content="原文来自R Views-Survival analysis with R，侵..侵删？ 　　Survival analysis的起源可以追溯到1662年，一位名为John Graunt的伦敦商人基于手中的死亡记录数据发布了一系列的推断，这使得生存分析成为统计学最古老的分枝之一。在十八世纪以前，基本生命表方法，包括处理删失数据的技巧被人们发现；十八世纪早期，那些大师们的工作（de Moivre对">
+<meta property="og:description" content="原文来自R Views-Survival analysis with R，侵..侵删？">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-3-1.png">
 <meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-4-1.png">
@@ -23,10 +23,10 @@
 <meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-7-1.png">
 <meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-9-1.png">
 <meta property="og:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-12-1.png">
-<meta property="og:updated_time" content="2017-12-06T05:41:33.585Z">
+<meta property="og:updated_time" content="2018-03-05T15:22:46.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻译：R-Views Survival analysis with R">
-<meta name="twitter:description" content="原文来自R Views-Survival analysis with R，侵..侵删？ 　　Survival analysis的起源可以追溯到1662年，一位名为John Graunt的伦敦商人基于手中的死亡记录数据发布了一系列的推断，这使得生存分析成为统计学最古老的分枝之一。在十八世纪以前，基本生命表方法，包括处理删失数据的技巧被人们发现；十八世纪早期，那些大师们的工作（de Moivre对">
+<meta name="twitter:description" content="原文来自R Views-Survival analysis with R，侵..侵删？">
 <meta name="twitter:image" content="https://donk3yzz.com/img/翻译：R中的生存分析_files/figure-markdown_github/unnamed-chunk-3-1.png">
   
     <link rel="alternative" href="/atom.xml" title="乐观的blog" type="application/atom+xml">
@@ -174,6 +174,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>　　原文来自<a href="https://rviews.rstudio.com/2017/09/25/survival-analysis-with-r/" target="_blank" rel="noopener">R Views-Survival analysis with R</a>，侵..侵删？</p>
+<a id="more"></a>
 <p>　　Survival analysis的起源可以追溯到1662年，一位名为John Graunt的伦敦商人基于手中的死亡记录数据发布了一系列的推断，这使得生存分析成为统计学最古老的分枝之一。在十八世纪以前，基本生命表方法，包括处理删失数据的技巧被人们发现；十八世纪早期，那些大师们的工作（de Moivre对于养老金的研究、Daniel Bernoulli对于接种天花风险的研究）奠定了生存分析现代方法的基础。如今，生存分析模型在工程、保险、市场营销、医药以及许多应用领域发挥着重要作用，所以，R中拥有丰富的生存分析函数也就不足为奇了。 <a href="https://cran.r-project.org/web/views/Survival.html" target="_blank" rel="noopener">CRAN’s Survival Analysis Task View</a>包含了几乎所有R中生存分析相关的函数和包，实在是无比的强大(indeed formidable)，我们都应该对于此Task View的维护者，Arthur Allignol和Aurielien Latouche充满感激之情。</p>
 <p>（注：一股浓浓的的四级翻译味…）</p>
 <p>　　但是如果当我们打开这个网页，就会发现里面的内容实在是太过于丰富，这座“大厦”让我们了解到R的开发人员为生存分析的理论和实践做出了多么大的贡献。尽管Task View的页面组织的很好，但是一个生存分析学者如果想要在里面找到他自己需要的方法可能也需要花上一些时间，更不用说R或者生存分析的新用户了。所以，我将提供一个比较狭窄的路径去供新人了解此Task View，依赖于<code>survival</code>,<code>ggplot</code>,<code>ggfortify</code>,<code>ranger</code>四个包。</p>
@@ -578,19 +579,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RSF</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diagrams</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">R studio</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">little tips</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RSF</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">diagrams</a>
               </li>
              
               <li class="article-tag-list-item">

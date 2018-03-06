@@ -14,15 +14,15 @@
 <meta property="og:title" content="Rmarkdown的中文实现">
 <meta property="og:url" content="https://donk3yzz.com/2018/03/05/2018-03-05-rmarkdown的中文实现/index.html">
 <meta property="og:site_name" content="乐观的blog">
-<meta property="og:description" content="我这个行为准确来讲叫蹭热度… Rmarkdown的中文输出Rmarkdown因为结合了markdown标记语言的特性和R代码块而被广泛使用，不过使用Rmarkdown输出中文PDF却是一件令人头疼的事情，不经过配置的Rstudio直接knit输出pdf文件，中文部分会是一片空白。 虽然这个问题已经找到了可靠的解决办法，不过随着tinytex的诞生，这个实现又多了一种轻量级的方法。 中文输出空白简单">
+<meta property="og:description" content="我这个行为准确来讲叫蹭热度… Rmarkdown的中文输出Rmarkdown因为结合了markdown标记语言的特性和R代码块而被广泛使用，不过使用Rmarkdown输出中文PDF却是一件令人头疼的事情，不经过配置的Rstudio直接knit输出pdf文件，中文部分会是一片空白。 虽然这个问题已经找到了可靠的解决办法，不过随着tinytex的诞生，这个实现又多了一种轻量级的方法。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://donk3yzz.com/img/Rmarkdown中文实现/img_1.png">
 <meta property="og:image" content="https://donk3yzz.com/img/Rmarkdown中文实现/img_2.png">
 <meta property="og:image" content="https://donk3yzz.com/img/Rmarkdown中文实现/img_3.png">
-<meta property="og:updated_time" content="2018-03-05T15:14:35.720Z">
+<meta property="og:updated_time" content="2018-03-05T15:21:43.553Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rmarkdown的中文实现">
-<meta name="twitter:description" content="我这个行为准确来讲叫蹭热度… Rmarkdown的中文输出Rmarkdown因为结合了markdown标记语言的特性和R代码块而被广泛使用，不过使用Rmarkdown输出中文PDF却是一件令人头疼的事情，不经过配置的Rstudio直接knit输出pdf文件，中文部分会是一片空白。 虽然这个问题已经找到了可靠的解决办法，不过随着tinytex的诞生，这个实现又多了一种轻量级的方法。 中文输出空白简单">
+<meta name="twitter:description" content="我这个行为准确来讲叫蹭热度… Rmarkdown的中文输出Rmarkdown因为结合了markdown标记语言的特性和R代码块而被广泛使用，不过使用Rmarkdown输出中文PDF却是一件令人头疼的事情，不经过配置的Rstudio直接knit输出pdf文件，中文部分会是一片空白。 虽然这个问题已经找到了可靠的解决办法，不过随着tinytex的诞生，这个实现又多了一种轻量级的方法。">
 <meta name="twitter:image" content="https://donk3yzz.com/img/Rmarkdown中文实现/img_1.png">
   
     <link rel="alternative" href="/atom.xml" title="乐观的blog" type="application/atom+xml">
@@ -172,6 +172,7 @@
         <p>我这个行为准确来讲叫蹭热度…</p>
 <h2 id="Rmarkdown的中文输出"><a href="#Rmarkdown的中文输出" class="headerlink" title="Rmarkdown的中文输出"></a>Rmarkdown的中文输出</h2><p>Rmarkdown因为结合了markdown标记语言的特性和R代码块而被广泛使用，不过使用Rmarkdown输出中文PDF却是一件令人头疼的事情，不经过配置的Rstudio直接knit输出pdf文件，中文部分会是一片空白。</p>
 <p>虽然这个问题已经找到了可靠的解决办法，不过随着<code>tinytex</code>的诞生，这个实现又多了一种轻量级的方法。</p>
+<a id="more"></a>
 <h2 id="中文输出空白简单原因"><a href="#中文输出空白简单原因" class="headerlink" title="中文输出空白简单原因"></a>中文输出空白简单原因</h2><p>在Rstudio中，Rmarkdown的输出是基于<code>knitr</code>实现（这也就不奇怪为什么输出按钮名为“knit”），而<code>knitr</code>的实现rmd输出为pdf机理大概是：</p>
 <ul>
 <li>首先运行代码块，将rmd文件转换为md文件</li>
@@ -472,19 +473,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RSF</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">diagrams</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">R studio</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">little tips</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RSF</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">diagrams</a>
               </li>
              
               <li class="article-tag-list-item">
